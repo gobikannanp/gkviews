@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | GK Views</title>
+    <link>/authors/</link>
+      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description><language>en-us</language><copyright>© 2020 GK Views</copyright><lastBuildDate>Tue, 14 Jan 2020 08:25:19 +0530</lastBuildDate>
+    <image>
+      <url>/images/icon_hub57c009c5aaffe3e86e976fb98747594_109132_512x512_fill_lanczos_center_2.png</url>
+      <title>Authors</title>
+      <link>/authors/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>/authors/gobikannan/</link>
+      <pubDate>Tue, 14 Jan 2020 08:25:19 +0530</pubDate>
+      <guid>/authors/gobikannan/</guid>
+      <description>&lt;p&gt;I&#39;m Gobikannan Ponmalai, working in ADP as a Lead Application Developer.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

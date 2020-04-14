@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/authors/gobikannan/</loc>
+    <lastmod>2020-01-14T08:25:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/</loc>
+    <lastmod>2020-01-14T08:25:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-01-14T08:25:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-01-14T08:25:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-01-14T08:25:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/how-to-get-machine-name-form-its-ip-address-using-powershell/</loc>
+    <lastmod>2020-01-14T08:25:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/powershell/</loc>
+    <lastmod>2020-01-14T08:25:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/powershell/</loc>
+    <lastmod>2020-01-14T08:25:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-01-14T08:25:19+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/find-files-by-length-of-filename-using-powershell/</loc>
+    <lastmod>2020-01-10T07:16:04+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/batch/</loc>
+    <lastmod>2019-12-15T21:08:14+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/create-two-branches-from-same-commit/</loc>
+    <lastmod>2019-12-15T21:08:14+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/git/</loc>
+    <lastmod>2019-12-15T21:08:14+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/git/</loc>
+    <lastmod>2019-12-15T21:08:14+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/how-to-get-dotnet-version-using-powershell/</loc>
+    <lastmod>2019-09-08T23:16:33+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/microsoft-sql/</loc>
+    <lastmod>2019-05-09T22:37:28+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ms-sql/</loc>
+    <lastmod>2019-05-09T22:37:28+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/prepare-insert-statement-using-powershell/</loc>
+    <lastmod>2019-05-09T22:37:28+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/create-insert-script-from-ms-sql-table/</loc>
+    <lastmod>2019-05-07T23:05:42+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/execute-storedprocedure-in-powershell/</loc>
+    <lastmod>2019-05-06T23:40:39+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+    <lastmod>2019-01-01T00:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tutorial/</loc>
+    <lastmod>2018-09-09T00:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/privacy/</loc>
+    <lastmod>2018-06-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/c-sharp/</loc>
+    <lastmod>2017-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/connection-string-from-app-config-in-windows-application/</loc>
+    <lastmod>2017-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/general/</loc>
+    <lastmod>2017-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/general/</loc>
+    <lastmod>2017-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/how-to-change-username-in-wordpress/</loc>
+    <lastmod>2017-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/interesting-facts-about-numbers/</loc>
+    <lastmod>2017-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/microsoft-.net/</loc>
+    <lastmod>2017-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ms.net/</loc>
+    <lastmod>2017-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/shrinking-database-log-file-to-specific-size/</loc>
+    <lastmod>2017-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/windowless-activex-controls-are-not-supported/</loc>
+    <lastmod>2017-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/wordpress/</loc>
+    <lastmod>2017-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication_types/</loc>
+  </url>
+  
+  <url>
+    <loc>/publication/</loc>
+  </url>
+  
+  <url>
+    <loc>/talk/</loc>
+  </url>
+  
+</urlset>

@@ -1,0 +1,89 @@
++++
+title = "Execute Storedprocedure in Powershell"
+subtitle = "How to execute stored procedure and manipulate result with SQL Objects using Powershell"
+
+# Add a summary to display on homepage (optional).
+summary = "How we can use sql client objects in the powershell to execute and process the result"
+
+date = 2019-05-06T23:40:39+05:30
+draft = false
+
+# Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
+authors = ["gobikannan"]
+
+# Is this a featured post? (true/false)
+featured = true
+
+# Tags and categories
+# For example, use `tags = []` for no tags, or the form `tags = ["A Tag", "Another Tag"]` for one or more tags.
+tags = ["PowerShell","MS SQL"]
+categories = ["PowerShell","Microsoft SQL"]
+
+# Projects (optional).
+#   Associate this post with one or more of your projects.
+#   Simply enter your project's folder or file name without extension.
+#   E.g. `projects = ["deep-learning"]` references 
+#   `content/project/deep-learning/index.md`.
+#   Otherwise, set `projects = []`.
+# projects = ["internal-project"]
+
+# Featured image
+# To use, add an image named `featured.jpg/png` to your page's folder. 
+[image]
+  # Caption (optional)
+  caption = ""
+
+  # Focal point (optional)
+  # Options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
+  focal_point = "Center"
+  preview_only = true
++++
+
+If you are familiar with C# SQL Objects, you can easily implement these object in powershell and you can automate some frequently used process using powershell.
+
+In this example we are going to see how we can use sql client objects in the powershell to execute and process the result.
+
+```powershell
+# How to connect to SQL Server and execute stored procedure using powershell"
+
+$databaseServerName = "sqlServerName"
+$databaseName = "databaseName"
+$databaseUsername = 'userName'
+$dbUserPassword = '<PasswordHere>'
+$connectionTO = 120
+$paramVal = 123
+
+# you can use different option to do the parameter value processing
+$param1Value = $paramVal
+
+$DatabaseConnectionString = "Server=$databaseServerName; Database=$databaseName; User Id=$databaseUsername; Password=$dbUserPassword;Connection Timeout=$connectionTO;"
+
+try {
+    $SqlConnection = New-Object System.Data.SqlClient.SqlConnection
+    $SqlConnection.ConnectionString = $DatabaseConnectionString
+
+    $SqlCommand = New-Object System.Data.SqlClient.SqlCommand
+    $SqlCommand.Connection = $SqlConnection
+    $SqlCommand.CommandText = "STORED_PROCEDURE_NAME"
+    $SqlCommand.CommandType = [System.Data.CommandType]::StoredProcedure
+    $SqlCommand.Parameters.AddWithValue("@Parameter1Name", $param1Value)
+
+    $DataSet = New-Object System.Data.DataSet
+    $SqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter($SqlCommand)
+    $SqlAdapter.Fill($DataSet)
+    if ($SqlConnection.State -eq [System.Data.ConnectionState]::Open) {
+        $SqlConnection.Close()
+    }
+    if (($null -ne $DataSet) -and ($DataSet.Tables.Count -gt 0)) {
+        $resultTable = $DataSet.Tables[0]
+        Write-Host "Result generated :"
+        # To Do: Use the first table result ($resultTable) in the result to do your process
+    }
+   
+}
+catch {
+    Write-Error $_.Exception.Message 
+}
+
+```
+

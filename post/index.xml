@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GK Views Posts | GK Views</title>
+    <link>/post/</link>
+      <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <description>GK Views Posts</description><language>en-us</language><copyright>© 2020 GK Views</copyright><lastBuildDate>Tue, 14 Jan 2020 08:25:19 +0530</lastBuildDate>
+    <image>
+      <url>/images/icon_hub57c009c5aaffe3e86e976fb98747594_109132_512x512_fill_lanczos_center_2.png</url>
+      <title>GK Views Posts</title>
+      <link>/post/</link>
+    </image>
+    
+    <item>
+      <title>How to Get Machine Name Form Its Ip Address Using Powershell</title>
+      <link>/post/how-to-get-machine-name-form-its-ip-address-using-powershell/</link>
+      <pubDate>Tue, 14 Jan 2020 08:25:19 +0530</pubDate>
+      <guid>/post/how-to-get-machine-name-form-its-ip-address-using-powershell/</guid>
+      <description>&lt;p&gt;Scenario:&lt;/p&gt;
+&lt;p&gt;I have list of machine IP, but I need name of the machines.&lt;/p&gt;
+&lt;p&gt;Solution:&lt;/p&gt;
+&lt;p&gt;To get he machine name I can use nslookup command, which returns the machine name using the DNS server.&lt;/p&gt;
+&lt;p&gt;So to get the list of machine names from the IP list I can use the below powershell script.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;
+$machines = @{
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;machine1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;10.20.100.12&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;machine2&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;30.40.102.56&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;foreach&lt;/span&gt;($item &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; $machines.Values){
+    $s = &amp;amp;nslookup $item
+    Write-Host $s
+}
+
+Read-Host
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Included Read-Host to wait util get key input from user&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Find Files by Length of Filename Using Powershell</title>
+      <link>/post/find-files-by-length-of-filename-using-powershell/</link>
+      <pubDate>Fri, 10 Jan 2020 07:16:04 +0530</pubDate>
+      <guid>/post/find-files-by-length-of-filename-using-powershell/</guid>
+      <description>&lt;p&gt;In windows you may get the file name length issue as like below in processing files like copy, move, delete, etc.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, and the directory name must be less than 248 characters.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In this scenario, you may want to find the files with file path length is greater than or equal to 260 char or particular length.&lt;/p&gt;
+&lt;p&gt;You can use below Powershell script to find files by length of filename.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;#&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; Get-ChildItem -Path &amp;#34;C:\Folder\Path\To\Check\The\File\Length\&amp;#34; -Recurse -File |Where-Object {$_&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;FullName&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;Length -ge 260 } | %{$_&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;FullName}
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;   % is alias of ForEach-Object &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#&amp;gt;&lt;/span&gt;
+
+Get-ChildItem -Path &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;C:\Folder\Path\To\Check\The\File\Length\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; -Recurse &lt;span style=&#34;color:#f92672&#34;&gt;-File&lt;/span&gt; |Where-Object {$_.FullName.Length &lt;span style=&#34;color:#f92672&#34;&gt;-ge&lt;/span&gt; 260 } | &lt;span style=&#34;color:#66d9ef&#34;&gt;ForEach&lt;/span&gt;-Object{$_.FullName}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can update the file length in above script which you want to find&lt;/p&gt;
+&lt;p&gt;If you want the result to a text file, you can pass the result to a text file using a pipe symbol.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;
+Get-ChildItem -Path &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;C:\Folder\Path\To\Check\The\File\Length\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; -Recurse &lt;span style=&#34;color:#f92672&#34;&gt;-File&lt;/span&gt; |Where-Object {$_.FullName.Length &lt;span style=&#34;color:#f92672&#34;&gt;-ge&lt;/span&gt; 260 } | &lt;span style=&#34;color:#66d9ef&#34;&gt;ForEach&lt;/span&gt;-Object{$_.FullName} | C&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;\Temp\Result.txt
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Create Two Branches From Same Commit</title>
+      <link>/post/create-two-branches-from-same-commit/</link>
+      <pubDate>Sun, 15 Dec 2019 21:08:14 +0530</pubDate>
+      <guid>/post/create-two-branches-from-same-commit/</guid>
+      <description>&lt;p&gt;To create two different branches with differnt commits from same commit, we can use the below content as batch file.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bat&#34; data-lang=&#34;bat&#34;&gt;git tag temp_tag
+
+:&lt;span style=&#34;color:#75715e&#34;&gt;: To check the list of local branch&lt;/span&gt;
+git branch
+
+git checkout myfirstbranch
+&lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; off
+&lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;This is a Sample File for testing&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;&amp;gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mytestfile1.txt&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; on
+git add &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mytestfile1.txt&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+git commit -m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;added a file in new branch&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+
+:&lt;span style=&#34;color:#75715e&#34;&gt;: Change to root tag&lt;/span&gt;
+git checkout tags/temp_tag
+
+git checkout mysecondbranch
+&lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; off
+&lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;This is another file for testing&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;&amp;gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mytestfile2.txt&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; on
+git add &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mytestfile2.txt&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+git commit -m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;added another file in another branch&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+
+:&lt;span style=&#34;color:#75715e&#34;&gt;: remove the local temp branch&lt;/span&gt;
+git tag -d temp_tag
+
+:&lt;span style=&#34;color:#75715e&#34;&gt;: push the branches to origin&lt;/span&gt;
+git push origin myfirstbranch:myfirstbranch
+git push origin mysecondbranch:mysecondbranch
+
+:&lt;span style=&#34;color:#75715e&#34;&gt;: checkout to diff branch if you want&lt;/span&gt;
+git checkout develop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To keep the base location (initial commit), a temporay tag is created in local to checkout later. This tag will be deleted from local to avoid further issue.&lt;/p&gt;
+&lt;p&gt;You can also use the Head~1 in checkout instead of tag.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to Get Dotnet Version Using Powershell</title>
+      <link>/post/how-to-get-dotnet-version-using-powershell/</link>
+      <pubDate>Sun, 08 Sep 2019 23:16:33 +0530</pubDate>
+      <guid>/post/how-to-get-dotnet-version-using-powershell/</guid>
+      <description>&lt;p&gt;To get the dotnet version using C#, we can use the below code&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; System;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Microsoft.Win32;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;GetDotNetVersion&lt;/span&gt;
+{
+   &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; Main()
+   {
+      Get45PlusFromRegistry();
+   }
+
+   &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; Get45PlusFromRegistry()
+   {
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt; subkey = &lt;span style=&#34;color:#e6db74&#34;&gt;@&amp;#34;SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\&amp;#34;&lt;/span&gt;;
+
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; ndpKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(subkey))
+      {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (ndpKey != &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &amp;amp;&amp;amp; ndpKey.GetValue(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Release&amp;#34;&lt;/span&gt;) != &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;) {
+            Console.WriteLine(&lt;span style=&#34;color:#e6db74&#34;&gt;$&amp;#34;.NET Framework Version: {CheckFor45PlusVersion((int) ndpKey.GetValue(&amp;#34;&lt;/span&gt;Release&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;))}&amp;#34;&lt;/span&gt;);
+        }
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+            Console.WriteLine(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.NET Framework Version 4.5 or later is not detected.&amp;#34;&lt;/span&gt;);
+         } 
+      }
+   
+      &lt;span style=&#34;color:#75715e&#34;&gt;// Checking the version using &amp;gt;= enables forward compatibility.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt; CheckFor45PlusVersion(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; releaseKey)
+      {
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (releaseKey &amp;gt;= &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4.8 or later&amp;#34;&lt;/span&gt;;
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (releaseKey &amp;gt;= &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4.7.2&amp;#34;&lt;/span&gt;;
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (releaseKey &amp;gt;= &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4.7.1&amp;#34;&lt;/span&gt;;
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (releaseKey &amp;gt;= &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4.7&amp;#34;&lt;/span&gt;;
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (releaseKey &amp;gt;= &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4.6.2&amp;#34;&lt;/span&gt;;
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (releaseKey &amp;gt;= &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4.6.1&amp;#34;&lt;/span&gt;;      
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (releaseKey &amp;gt;= &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4.6&amp;#34;&lt;/span&gt;;      
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (releaseKey &amp;gt;= &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4.5.2&amp;#34;&lt;/span&gt;;      
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (releaseKey &amp;gt;= &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4.5.1&amp;#34;&lt;/span&gt;;      
+         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (releaseKey &amp;gt;= &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4.5&amp;#34;&lt;/span&gt;;      
+         &lt;span style=&#34;color:#75715e&#34;&gt;// This code should never execute. A non-null release key should mean
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;         &lt;span style=&#34;color:#75715e&#34;&gt;// that 4.5 or later is installed.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;No 4.5 or later version detected&amp;#34;&lt;/span&gt;;
+      }
+   }
+}   
+&lt;span style=&#34;color:#75715e&#34;&gt;// This example displays output like the following:
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;//       .NET Framework Version: 4.6.1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To get the dotnet version using powershell, we can use the below script&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;
+$subkey = @&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+
+Get-ChildItem &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP&amp;#39;&lt;/span&gt; -recurse |
+Get-ItemProperty -name Version,Release -EA 0 |
+Where { $_.PSChildName &lt;span style=&#34;color:#f92672&#34;&gt;-match&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;^(?![SW])\p{L}&amp;#39;&lt;/span&gt;} |
+Select PSChildName, Version, Release, @{
+  name=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Product&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+  expression={
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;switch&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-regex&lt;/span&gt; ($_.Release) {
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;378389&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;[Version]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;4.5&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; }
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;378675|378758&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;[Version]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;4.5.1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; }
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;379893&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;[Version]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;4.5.2&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; }
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;393295|393297&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;[Version]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;4.6&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; }
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;394254|394271&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;[Version]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;4.6.1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; }
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;394802|394806&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;[Version]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;4.6.2&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; }
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;460798|460805&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;[Version]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;4.7&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; }
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;461308|461310&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;[Version]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;4.7.1&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; }
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;461808|461814&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;[Version]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;4.7.2&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; }
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;528040|528049&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;[Version]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;4.8&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; }
+        {$_ &lt;span style=&#34;color:#f92672&#34;&gt;-gt&lt;/span&gt; 528049} { &lt;span style=&#34;color:#66d9ef&#34;&gt;[Version]&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;New Version (&amp;gt; 4.8), please include version in the script&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; }
+      }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ref:  &lt;a href=&#34;https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed#version_table&#34; target=&#34;_blank&#34;&gt;How to: Determine which .NET Framework versions are installed &lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Prepare Insert Statement Using Powershell</title>
+      <link>/post/prepare-insert-statement-using-powershell/</link>
+      <pubDate>Thu, 09 May 2019 22:37:28 +0000</pubDate>
+      <guid>/post/prepare-insert-statement-using-powershell/</guid>
+      <description>&lt;p&gt;In my previous post I have explained, how we can connect to SQL Server database and execute stored procedure from the powershell. If you missed it here is the link : &lt;a href=&#34;/post/create-insert-script-from-ms-sql-table/&#34;&gt;Execute Storedprocedure in Powershell&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Lets take the same example where we used for &lt;a href=&#34;/post/create-insert-script-from-ms-sql-table/&#34;&gt;Create Insert Script From MS Sql Table&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The create script for the table in the example is&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; ANSI_NULLS &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; QUOTED_IDENTIFIER &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt; [dbo].[MyTable1](
+	[Id] [int] &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+	[Name] [nvarchar](&lt;span style=&#34;color:#ae81ff&#34;&gt;255&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+	[Age] [int] &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+	[Address] [nvarchar](&lt;span style=&#34;color:#ae81ff&#34;&gt;255&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+	[City] [nvarchar](&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;CONSTRAINT&lt;/span&gt; [PK_MyTable1] &lt;span style=&#34;color:#66d9ef&#34;&gt;PRIMARY&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;KEY&lt;/span&gt; CLUSTERED 
+(
+	[Id] &lt;span style=&#34;color:#66d9ef&#34;&gt;ASC&lt;/span&gt;
+)&lt;span style=&#34;color:#66d9ef&#34;&gt;WITH&lt;/span&gt; (PAD_INDEX &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;OFF&lt;/span&gt;, STATISTICS_NORECOMPUTE &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;OFF&lt;/span&gt;, IGNORE_DUP_KEY &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;OFF&lt;/span&gt;, ALLOW_ROW_LOCKS &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;, ALLOW_PAGE_LOCKS &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt; [&lt;span style=&#34;color:#66d9ef&#34;&gt;PRIMARY&lt;/span&gt;]
+)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We are going to convert the table row data to insert script using a stored procedure. Each data will be converted to string based on its datatype.&lt;/p&gt;
+&lt;p&gt;For that I&#39;m going to use a function named &amp;ldquo;FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT&amp;rdquo; which returns a string which converts the data to string based on the column datatype.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; ANSI_NULLS &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; QUOTED_IDENTIFIER &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;-- =============================================
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Author: Gobikannan P
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Create date: 01 May 2019
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Description: To Get the column string for insert script generation
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- =============================================
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FUNCTION&lt;/span&gt; [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] 
+(
+	&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColumnName sysname, &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;DataType varchar(&lt;span style=&#34;color:#ae81ff&#34;&gt;128&lt;/span&gt;), &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;IncludeTimestamp bit &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;RETURNS&lt;/span&gt; NVARCHAR(&lt;span style=&#34;color:#66d9ef&#34;&gt;MAX&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;BEGIN&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;DECLARE&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;RetVal NVARCHAR(&lt;span style=&#34;color:#66d9ef&#34;&gt;MAX&lt;/span&gt;)
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;RetVal &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;CASE&lt;/span&gt; 
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;WHEN&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;DataType &lt;span style=&#34;color:#66d9ef&#34;&gt;IN&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;char&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;varchar&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;nchar&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;nvarchar&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;sysname&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
+			&lt;span style=&#34;color:#66d9ef&#34;&gt;THEN&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;COALESCE(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; + REPLACE(RTRIM(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColumnName &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;),&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;NULL&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;WHEN&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;DataType &lt;span style=&#34;color:#66d9ef&#34;&gt;IN&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;datetime&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;smalldatetime&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
+			&lt;span style=&#34;color:#66d9ef&#34;&gt;THEN&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;COALESCE(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; + RTRIM(CONVERT(char,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColumnName &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,109))+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;NULL&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;WHEN&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;DataType &lt;span style=&#34;color:#66d9ef&#34;&gt;IN&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;uniqueidentifier&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
+			&lt;span style=&#34;color:#66d9ef&#34;&gt;THEN&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;COALESCE(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; + REPLACE(CONVERT(char(255),RTRIM(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColumnName &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)),&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;NULL&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;WHEN&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;DataType &lt;span style=&#34;color:#66d9ef&#34;&gt;IN&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;text&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ntext&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
+			&lt;span style=&#34;color:#66d9ef&#34;&gt;THEN&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;COALESCE(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; + REPLACE(CONVERT(char(8000),&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColumnName &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;),&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;NULL&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;					
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;WHEN&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;DataType &lt;span style=&#34;color:#66d9ef&#34;&gt;IN&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;binary&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;varbinary&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
+			&lt;span style=&#34;color:#66d9ef&#34;&gt;THEN&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;COALESCE(RTRIM(CONVERT(char,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;CONVERT(int,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColumnName &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;))),&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;NULL&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;  
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;WHEN&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;DataType &lt;span style=&#34;color:#66d9ef&#34;&gt;IN&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;timestamp&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;rowversion&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) 
+			&lt;span style=&#34;color:#66d9ef&#34;&gt;THEN&lt;/span&gt;  
+				&lt;span style=&#34;color:#66d9ef&#34;&gt;CASE&lt;/span&gt; 
+					&lt;span style=&#34;color:#66d9ef&#34;&gt;WHEN&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;IncludeTimestamp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; 
+						&lt;span style=&#34;color:#66d9ef&#34;&gt;THEN&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;DEFAULT&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; 
+					&lt;span style=&#34;color:#66d9ef&#34;&gt;ELSE&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;COALESCE(RTRIM(CONVERT(char,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;CONVERT(int,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColumnName &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;))),&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;NULL&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;  
+				&lt;span style=&#34;color:#66d9ef&#34;&gt;END&lt;/span&gt;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;WHEN&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;DataType &lt;span style=&#34;color:#66d9ef&#34;&gt;IN&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;float&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;real&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;money&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;smallmoney&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+			&lt;span style=&#34;color:#66d9ef&#34;&gt;THEN&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;COALESCE(LTRIM(RTRIM(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;CONVERT(char, &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColumnName  &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,2)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)),&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;NULL&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; 
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;ELSE&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;COALESCE(LTRIM(RTRIM(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;CONVERT(char, &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColumnName  &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)),&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;NULL&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; 
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;END&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; + &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;RETURN&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;RetVal
+&lt;span style=&#34;color:#66d9ef&#34;&gt;END&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Below stored procedure uses the above function to construct insert statement from column. If you have any additional columns which you want to insert as NULL then need to use a constant value instead of calling the above function.&lt;/p&gt;
+&lt;p&gt;In the blow stored procedure script &amp;lsquo;MaritalStatus&amp;rsquo; column is added with NULL value.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; ANSI_NULLS &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; QUOTED_IDENTIFIER &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;-- =============================================
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Author:		Gobikannan Ponmalai
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Create date: 01 May 2019
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Description:	To create insert script from database table
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- =============================================
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;PROCEDURE&lt;/span&gt; [dbo].[SP_INSERTSCRIPT_FROM_DATATABLE]
+	&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;AgeLimit int
+&lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;BEGIN&lt;/span&gt;	
+	
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;DECLARE&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;InsertStatement varchar(&lt;span style=&#34;color:#66d9ef&#34;&gt;max&lt;/span&gt;),&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;INCLUDENULLCOLUMN varchar(&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;NULL&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; + &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed NVARCHAR(&lt;span style=&#34;color:#66d9ef&#34;&gt;max&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;DECLARE&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ResultInsertQuery &lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt;(InsertQuery NVARCHAR(&lt;span style=&#34;color:#66d9ef&#34;&gt;MAX&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;)
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;IF&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;EXISTS&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; MyTable1)
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;BEGIN&lt;/span&gt;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-- Info : There is no row found in the Table to convert insert script&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt; [InsertResult]
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;RETURN&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;END&lt;/span&gt;
+	
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;InsertStatement &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;INSERT INTO [dbo].[MyTable2]([Id],[Name],[Age],[MaritalStatus],[Address],[City]) VALUES &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;	
+	
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Id&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;-- [Id]
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;nvarchar&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;-- [Name]
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Age&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;-- [Age]	
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;INCLUDENULLCOLUMN  &lt;span style=&#34;color:#75715e&#34;&gt;-- [MaritalStatus]
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Address&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;nvarchar&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;-- [Address]
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;City&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;varchar&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;-- [City]
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;LEFT&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed,len(&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;)
+	&lt;span style=&#34;color:#75715e&#34;&gt;-- SELECT @ColScriptConstructed
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;SELECT &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 
+	&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;+ &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 
+	&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;+ &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; AS InsQueryVal FROM [dbo].[MyTable1] WHERE Age &amp;gt; @Age&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; 
+	print &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ResultInsertQuery(InsertQuery)
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;EXEC&lt;/span&gt; sp_executesql &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed,N&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;@Age int&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;AgeLimit
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;InsertStatement &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; CHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;CHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; InsertQuery &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; CHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;CHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt; [InsertResult] &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ResultInsertQuery
+&lt;span style=&#34;color:#66d9ef&#34;&gt;END&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now you can use this stored procedure to get the datatable to insert scripts in each rows.  As we&#39;ve seen earlier, we could call this stored procedure usnig powershell script as like below&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# To connect to SQL Server and execute stored procedure using powershell&amp;#34;&lt;/span&gt;
+$databaseServerName = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;localhost&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+$databaseName = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;databaseName&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+$databaseUsername = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;userName&amp;#39;&lt;/span&gt;
+$dbUserPassword = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;PasswordHere&amp;gt;&amp;#39;&lt;/span&gt;
+$connectionTO = 120
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# you can use different option to do the parameter value processing&lt;/span&gt;
+$ageLimit = 31
+&lt;span style=&#34;color:#75715e&#34;&gt;# Variable to hold current file directory&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#$scriptPath = split-path -parent $MyInvocation.MyCommand.Definition&lt;/span&gt;
+$scriptPath = $PSScriptRoot
+$dateInFormat = (Get-Date).ToString(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;yyyyMMdd_HHmmss&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+
+$DatabaseConnectionString = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Server=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;databaseServerName; Database=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;databaseName; User Id=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;databaseUsername; Password=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;dbUserPassword;Connection Timeout=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;connectionTO;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt; {
+    $SqlConnection = New-Object System.Data.SqlClient.SqlConnection
+    $SqlConnection.ConnectionString = $DatabaseConnectionString
+
+    $SqlCommand = New-Object System.Data.SqlClient.SqlCommand
+    $SqlCommand.Connection = $SqlConnection
+    $SqlCommand.CommandText = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;SP_INSERTSCRIPT_FROM_DATATABLE&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+    $SqlCommand.CommandType = &lt;span style=&#34;color:#66d9ef&#34;&gt;[System.Data.CommandType]&lt;/span&gt;::StoredProcedure
+    $SqlCommand.Parameters.AddWithValue(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;@AgeLimit&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, $ageLimit)
+
+    $DataSet = New-Object System.Data.DataSet
+    $SqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter($SqlCommand)
+    $SqlAdapter.Fill($DataSet)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($conn.State &lt;span style=&#34;color:#f92672&#34;&gt;-eq&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[System.Data.ConnectionState]&lt;/span&gt;::Open) {
+        $SqlConnection.Close()
+    }
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (($null &lt;span style=&#34;color:#f92672&#34;&gt;-ne&lt;/span&gt; $DataSet) &lt;span style=&#34;color:#f92672&#34;&gt;-and&lt;/span&gt; ($DataSet.Tables.Count &lt;span style=&#34;color:#f92672&#34;&gt;-gt&lt;/span&gt; 0)) {
+        $resultTable = $DataSet.Tables[0]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($resultTable.Rows.Count &lt;span style=&#34;color:#f92672&#34;&gt;-gt&lt;/span&gt; 0) {
+            $OutPutFilePath = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;scriptPath\SQLInsertQuery_Result_&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{dateInFormat}.sql&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+            Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Result Row Count :&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; $resultTable.Rows.Count
+            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-- Insert script created on  &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{dateInFormat}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; | Out-File $OutPutFilePath  -Encoding ascii
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;foreach&lt;/span&gt; ($row &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; $resultTable.Rows) {
+                $row[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;InsertResult&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;] | Out-File $OutPutFilePath -Append -Encoding ascii
+            }
+        }
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+            Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;No rows found&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+        }
+    }
+   
+}
+&lt;span style=&#34;color:#66d9ef&#34;&gt;catch&lt;/span&gt; {
+    Write-Error $_.Exception.Message 
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The result will be as like below&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Insert script created on  20190501_231339
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; [dbo].[MyTable2]([Id],[Name],[Age],[MaritalStatus],[Address],[City]) &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; 
+(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Will Smith&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;,&lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Philadelphia, Pennsylvania, USA&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Philadelphia&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;);
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; [dbo].[MyTable2]([Id],[Name],[Age],[MaritalStatus],[Address],[City]) &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; 
+(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Leonardo DiCaprio&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;44&lt;/span&gt;,&lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Hollywood, Los Angeles, California, USA&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Los Angeles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;);
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; [dbo].[MyTable2]([Id],[Name],[Age],[MaritalStatus],[Address],[City]) &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; 
+(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Ben Kingsley&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;75&lt;/span&gt;,&lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Scarborough, Yorkshire, England, UK&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Scarborough&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;);
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can create stored procedure as like below to create multi value insert script.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; ANSI_NULLS &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; QUOTED_IDENTIFIER &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;-- =============================================
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Author:		Gobikannan Ponmalai
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Create date: 01 May 2019
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Description:	To create insert script from database table
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- =============================================
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;PROCEDURE&lt;/span&gt; [dbo].[SP_MULTI_INSERTSCRIPT_FROM_DATATABLE]
+	&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;AgeLimit int
+&lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;BEGIN&lt;/span&gt;
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;DECLARE&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;InsertStatement varchar(&lt;span style=&#34;color:#66d9ef&#34;&gt;max&lt;/span&gt;),&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;INCLUDENULLCOLUMN varchar(&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;NULL&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; + &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed NVARCHAR(&lt;span style=&#34;color:#66d9ef&#34;&gt;max&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;DECLARE&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ResultInsertQuery &lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt;(InsertQuery NVARCHAR(&lt;span style=&#34;color:#66d9ef&#34;&gt;MAX&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;)
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;IF&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;EXISTS&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; MyTable1)
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;BEGIN&lt;/span&gt;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;-- Info : There is no row found in the Table to convert insert script&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt; [InsertResult]
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;RETURN&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;END&lt;/span&gt;
+	
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;InsertStatement &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;INSERT INTO [dbo].[MyTable2]([Id],[Name],[Age],[MaritalStatus],[Address],[City]) VALUES &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;	
+	
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Id&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;-- [Id]
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;nvarchar&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;-- [Name]
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Age&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;-- [Age]	
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;INCLUDENULLCOLUMN  &lt;span style=&#34;color:#75715e&#34;&gt;-- [MaritalStatus]
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Address&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;nvarchar&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;-- [Address]
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;City&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;varchar&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;-- [City]
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;LEFT&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed,len(&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;)
+	&lt;span style=&#34;color:#75715e&#34;&gt;-- SELECT @ColScriptConstructed
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;SELECT &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 
+	&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;+ &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 
+	&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;+ &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; AS InsQueryVal FROM [dbo].[MyTable1] WHERE Age &amp;gt; @Age&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; 
+	print &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ResultInsertQuery(InsertQuery)
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;EXEC&lt;/span&gt; sp_executesql &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ColScriptConstructed,N&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;@Age int&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;AgeLimit
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;InsertStatement &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; CHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;CHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; STRING_AGG(InsertQuery, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; CHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;CHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)) &lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt; [InsertResult] &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;ResultInsertQuery
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;END&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The result will be as like below&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Insert script created on  20190501_232250
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; [dbo].[MyTable2]([Id],[Name],[Age],[MaritalStatus],[Address],[City]) &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; 
+(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Will Smith&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;,&lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Philadelphia, Pennsylvania, USA&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Philadelphia&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;),
+(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Leonardo DiCaprio&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;44&lt;/span&gt;,&lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Hollywood, Los Angeles, California, USA&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Los Angeles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;),
+(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Ben Kingsley&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;75&lt;/span&gt;,&lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Scarborough, Yorkshire, England, UK&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Scarborough&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Create Insert Script From MS Sql Table</title>
+      <link>/post/create-insert-script-from-ms-sql-table/</link>
+      <pubDate>Tue, 07 May 2019 23:05:42 +0000</pubDate>
+      <guid>/post/create-insert-script-from-ms-sql-table/</guid>
+      <description>&lt;p&gt;Even though the &amp;ldquo;Generate Script&amp;rdquo; feature is available introduced long back ago, some of the developers don&#39;t aware of this option to create insert script.&lt;/p&gt;
+&lt;p&gt;For example, the below table is in my database.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; ANSI_NULLS &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; QUOTED_IDENTIFIER &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt; [dbo].[MyTable1](
+	[Id] [int] &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+	[Name] [nvarchar](&lt;span style=&#34;color:#ae81ff&#34;&gt;255&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+	[Age] [int] &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+	[Address] [nvarchar](&lt;span style=&#34;color:#ae81ff&#34;&gt;255&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+	[City] [nvarchar](&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+ &lt;span style=&#34;color:#66d9ef&#34;&gt;CONSTRAINT&lt;/span&gt; [PK_MyTable1] &lt;span style=&#34;color:#66d9ef&#34;&gt;PRIMARY&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;KEY&lt;/span&gt; CLUSTERED 
+(
+	[Id] &lt;span style=&#34;color:#66d9ef&#34;&gt;ASC&lt;/span&gt;
+)&lt;span style=&#34;color:#66d9ef&#34;&gt;WITH&lt;/span&gt; (PAD_INDEX &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;OFF&lt;/span&gt;, STATISTICS_NORECOMPUTE &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;OFF&lt;/span&gt;, IGNORE_DUP_KEY &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;OFF&lt;/span&gt;, ALLOW_ROW_LOCKS &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;, ALLOW_PAGE_LOCKS &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt; [&lt;span style=&#34;color:#66d9ef&#34;&gt;PRIMARY&lt;/span&gt;]
+)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I have some data in the table. I want to create an insert script for this table.&lt;/p&gt;
+&lt;p&gt;Steps:&lt;/p&gt;
+&lt;p&gt;Right click on the database which contains the table.&lt;/p&gt;
+&lt;p&gt;Go to &amp;ldquo;Task&amp;rdquo; -&amp;gt; &amp;ldquo;Generate Scripts&amp;hellip;&amp;rdquo; option&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;01_Generate_Script_Task.png&#34; alt=&#34;Generate_Script_Task&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now you will get &amp;ldquo;Generate &amp;amp; Publish Scripts&amp;rdquo; Dialog&lt;/p&gt;
+&lt;p&gt;In the &amp;ldquo;Introduction&amp;rdquo; section, click &amp;ldquo;Next&amp;rdquo; to skip basic instruction about these options&lt;/p&gt;
+&lt;p&gt;In &amp;ldquo;Choose Objects&amp;rdquo; section, click the radio button on the &amp;ldquo;Select specific database objects&amp;rdquo; option. Now, checkbox prior to each database objects is enabled.&lt;/p&gt;
+&lt;p&gt;Now you can choose the table which you want to generate the insert script.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;02_Choose_Table_Object.png&#34; alt=&#34;Choose_Table_Object&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Then click &amp;ldquo;Next&amp;rdquo; to move to &amp;ldquo;Set Scripting Options&amp;rdquo; section.&lt;/p&gt;
+&lt;p&gt;You can choose your output format in this section.&lt;/p&gt;
+&lt;p&gt;The most important step here to create insert script is, select &amp;ldquo;Advanced&amp;rdquo; section.&lt;/p&gt;
+&lt;p&gt;In the &amp;ldquo;Advanced Scripting Options&amp;rdquo;, change &amp;ldquo;Types of data to script&amp;rdquo; to &amp;ldquo;Data only&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;There are three option is available&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Data only&lt;/li&gt;
+&lt;li&gt;Schema and data&lt;/li&gt;
+&lt;li&gt;Schema only&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;03_Advanced_Option.png&#34; alt=&#34;Advanced_Option&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Go through the remaining option, change if you want any. Click &amp;ldquo;OK&amp;rdquo; to close the dialog.&lt;/p&gt;
+&lt;p&gt;Click &amp;ldquo;Next&amp;rdquo; to see the Summary option&lt;/p&gt;
+&lt;p&gt;Click &amp;ldquo;Next&amp;rdquo; to see the process of the scripting.
+After the successful script generation, click &amp;ldquo;Finish&amp;rdquo; to see the output.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;
+USE [DBNAMEHERE]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; [dbo].[MyTable1] ([Id], [Name], [Age], [Address], [City]) &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, N&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Will Smith&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;, N&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Philadelphia, Pennsylvania, USA&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, N&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Philadelphia&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; [dbo].[MyTable1] ([Id], [Name], [Age], [Address], [City]) &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, N&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Leonardo DiCaprio&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;44&lt;/span&gt;, N&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Hollywood, Los Angeles, California, USA&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, N&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Los Angeles&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; [dbo].[MyTable1] ([Id], [Name], [Age], [Address], [City]) &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, N&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Ben Kingsley&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;75&lt;/span&gt;, N&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Scarborough, Yorkshire, England, UK&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;, N&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Scarborough&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ddl-statements&#34;&gt;DDL Statements&lt;/h2&gt;
+&lt;p&gt;To generate DDL statements, choose Schema only option in the Types of data to script&amp;rdquo;. And also you can specify SQL Server Version for the script under &amp;ldquo;Script for Server Version&amp;rdquo; to generate backward compatibility scripts&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Execute Storedprocedure in Powershell</title>
+      <link>/post/execute-storedprocedure-in-powershell/</link>
+      <pubDate>Mon, 06 May 2019 23:40:39 +0000</pubDate>
+      <guid>/post/execute-storedprocedure-in-powershell/</guid>
+      <description>&lt;p&gt;If you are familiar with C# SQL Objects, you can easily implement these object in powershell and you can automate some frequently used process using powershell.&lt;/p&gt;
+&lt;p&gt;In this example we are going to see how we can use sql client objects in the powershell to execute and process the result.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# How to connect to SQL Server and execute stored procedure using powershell&amp;#34;&lt;/span&gt;
+
+$databaseServerName = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;sqlServerName&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+$databaseName = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;databaseName&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+$databaseUsername = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;userName&amp;#39;&lt;/span&gt;
+$dbUserPassword = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;lt;PasswordHere&amp;gt;&amp;#39;&lt;/span&gt;
+$connectionTO = 120
+$paramVal = 123
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# you can use different option to do the parameter value processing&lt;/span&gt;
+$param1Value = $paramVal
+
+$DatabaseConnectionString = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Server=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;databaseServerName; Database=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;databaseName; User Id=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;databaseUsername; Password=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;dbUserPassword;Connection Timeout=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;connectionTO;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt; {
+    $SqlConnection = New-Object System.Data.SqlClient.SqlConnection
+    $SqlConnection.ConnectionString = $DatabaseConnectionString
+
+    $SqlCommand = New-Object System.Data.SqlClient.SqlCommand
+    $SqlCommand.Connection = $SqlConnection
+    $SqlCommand.CommandText = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;STORED_PROCEDURE_NAME&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+    $SqlCommand.CommandType = &lt;span style=&#34;color:#66d9ef&#34;&gt;[System.Data.CommandType]&lt;/span&gt;::StoredProcedure
+    $SqlCommand.Parameters.AddWithValue(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;@Parameter1Name&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, $param1Value)
+
+    $DataSet = New-Object System.Data.DataSet
+    $SqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter($SqlCommand)
+    $SqlAdapter.Fill($DataSet)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($SqlConnection.State &lt;span style=&#34;color:#f92672&#34;&gt;-eq&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[System.Data.ConnectionState]&lt;/span&gt;::Open) {
+        $SqlConnection.Close()
+    }
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (($null &lt;span style=&#34;color:#f92672&#34;&gt;-ne&lt;/span&gt; $DataSet) &lt;span style=&#34;color:#f92672&#34;&gt;-and&lt;/span&gt; ($DataSet.Tables.Count &lt;span style=&#34;color:#f92672&#34;&gt;-gt&lt;/span&gt; 0)) {
+        $resultTable = $DataSet.Tables[0]
+        Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Result generated :&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# To Do: Use the first table result ($resultTable) in the result to do your process&lt;/span&gt;
+    }
+   
+}
+&lt;span style=&#34;color:#66d9ef&#34;&gt;catch&lt;/span&gt; {
+    Write-Error $_.Exception.Message 
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Connection string from app.config in windows application</title>
+      <link>/post/connection-string-from-app-config-in-windows-application/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      <guid>/post/connection-string-from-app-config-in-windows-application/</guid>
+      <description>&lt;p&gt;In windows application configuration file, connection strings for your database can be stored as key/value pairs in the connectionStrings section of the configuration element.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;configuration&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;connectionStrings&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;add&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MyDBConnection&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;connectionString=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Server=xxxx; UID=xxxx; PWD=xxxx; Database=xxxx;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/connectionStrings&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To access your connection string from the configuration file you need to use the following code.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cs&#34; data-lang=&#34;cs&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt; connectionString = ConfigurationManager.ConnectionStrings[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MyDBConnection&amp;#34;&lt;/span&gt;].ConnectionString;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The ConfigurationManager class in included with in the System.Configuration namespace.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cs&#34; data-lang=&#34;cs&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; System.Configuration;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After the using statement included, compiler says that&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“The name ‘ConfigurationManager’ does not exist in the current context”.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To resolve this problem you need to add reference to “C:\Windows\Microsoft.NET\Framework&amp;lt;Version Folder&amp;gt;\System.configuration.dll” using following steps. (Eg: C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.Configuration.dll)
+Goto Project -&amp;gt; Add References…&lt;/p&gt;
+&lt;p&gt;Switch to “Assemblies” tab in ‘Add Reference’ window, and select System.Configuration and click OK to add the reference in your project. (You can search “System.Configuration” to locate the reference)&lt;/p&gt;
+&lt;p&gt;Now the connection string from the app.config file will be accessed using the above code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to change username in WordPress</title>
+      <link>/post/how-to-change-username-in-wordpress/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      <guid>/post/how-to-change-username-in-wordpress/</guid>
+      <description>&lt;p&gt;There are three ways to change the username in WordPress.&lt;/p&gt;
+&lt;p&gt;First one is using Add New User in WordPress:-&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Login to your WordPress dashboard.&lt;/li&gt;
+&lt;li&gt;Click on Add New User in User section and provide user details. Make sure that the role should be Administrator then click on Add User.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;Add_New_User_Wordpress.png&#34; alt=&#34;Add_New_User_Wordpress&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Log out current user session and Login again using new user credential. Once you logged in successfully, Go to User section.&lt;/li&gt;
+&lt;li&gt;Select the admin user and then click the delete button.&lt;/li&gt;
+&lt;li&gt;It asks about existing posts. Select Attribute all posts and links to option and select your current username in the drop down and then click Confirm Delete.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now the admin user is deleted from your user section and the existing posts are changed to your current user detail.&lt;/p&gt;
+&lt;p&gt;The Second way is using phpMyAdmin:-&lt;/p&gt;
+&lt;p&gt;You need a credential for your database to do these steps.&lt;/p&gt;
+&lt;p&gt;Backup your database before doing the following steps for safety.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Login to phpMyAdmin to access your database.&lt;/li&gt;
+&lt;li&gt;Under the Structure section, you will find out WP_users table. (the prefix of the table WP_ may vary in your table structure, based on your table prefix configuration )&lt;/li&gt;
+&lt;li&gt;Click the Browse icon next to that table it will list out the records in the table(the users for your site). Here you can find the username.&lt;/li&gt;
+&lt;li&gt;Click on Edit icon (Like pencil icon) in the corresponding row.&lt;/li&gt;
+&lt;li&gt;Change the value of the user_login field to your new login username and click Go button to save the current changes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now you can log in using the new username which you updated in the user table&lt;/p&gt;
+&lt;p&gt;The third way is using the WordPress plugin:-&lt;/p&gt;
+&lt;p&gt;The following plugin will help you to change the user’s login username.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://wordpress.org/plugins/username-changer/&#34; target=&#34;_blank&#34; title=&#34;Username Changer Wordpress Plugin&#34; &gt;Username Changer&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://wordpress.org/plugins/user-id-changer/&#34; target=&#34;_blank&#34; title=&#34;User ID Changer Wordpress Plugin&#34; &gt;User ID Changer&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You need to follow the instructions within the plugin to change username.&lt;/p&gt;
+&lt;p&gt;You may use any one the way to change the default username. But my preference goes to the first way. Because it is secured one and it is provided by WordPress itself.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Interesting Facts About Numbers</title>
+      <link>/post/interesting-facts-about-numbers/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      <guid>/post/interesting-facts-about-numbers/</guid>
+      <description>&lt;p&gt;The letters &lt;strong&gt;A, B, C and D&lt;/strong&gt; do not appear in the spelling of 1 to 99 (That is &lt;strong&gt;ONE, TWO, .. NINETY NINE&lt;/strong&gt;). The letter &lt;strong&gt;D&lt;/strong&gt; appears the first time in &lt;strong&gt;HUNDRED&lt;/strong&gt;. The letter &lt;strong&gt;A&lt;/strong&gt; appears the first time in &lt;strong&gt;THOUSAND&lt;/strong&gt;. The letter &lt;strong&gt;B&lt;/strong&gt; appears the first time in &lt;strong&gt;BILLION&lt;/strong&gt;. The letter &lt;strong&gt;C&lt;/strong&gt; appears the first time in &lt;strong&gt;CORER&lt;/strong&gt;. Very interesting isn’t it? Share here if you know any interesting facts about numbers.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Shrinking database log file to specific size</title>
+      <link>/post/shrinking-database-log-file-to-specific-size/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      <guid>/post/shrinking-database-log-file-to-specific-size/</guid>
+      <description>&lt;p&gt;In MS SQL server there may be a chance to get “The log file for database ‘DatabaseName’ is full.”&lt;/p&gt;
+&lt;p&gt;One of the ways to fix this problem is to back up the database and shrinking database log file to a specific size. You can use Right click on the database and choose Task -&amp;gt; Shrink -&amp;gt; Database in Microsoft SQL Server Management Studio to shrink the database. You can shrink the database file using Task -&amp;gt; Shrink -&amp;gt; File to shrink the Log or Data file. Instead of this, you can use the SQL script to shrink the log file.&lt;/p&gt;
+&lt;p&gt;The syntax to shrink the database log file is as follows.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;USE DatabaseName;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;-- Truncate the log by changing the database recovery model to SIMPLE.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;ALTER&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;DATABASE&lt;/span&gt; DatabaseName
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; RECOVERY &lt;span style=&#34;color:#66d9ef&#34;&gt;SIMPLE&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;-- Shrink the truncated log file to (specify size here) 1 MB.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;DBCC SHRINKFILE (DatabaseName_log, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;);
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;-- Reset the database recovery model.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;ALTER&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;DATABASE&lt;/span&gt; DatabaseName
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; RECOVERY &lt;span style=&#34;color:#66d9ef&#34;&gt;FULL&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In this syntax, DatabaseName is the name of your database.&lt;/p&gt;
+&lt;p&gt;DatabaseName_log is the logical name of your database. (Not physical file name of the database log file)&lt;/p&gt;
+&lt;p&gt;You can get this log file name using the following way.&lt;/p&gt;
+&lt;p&gt;Open the MS SQL Server Management Studio.&lt;/p&gt;
+&lt;p&gt;Select the database property by right click the database in Object Explorer.&lt;/p&gt;
+&lt;p&gt;Click the Files page (below to the General).&lt;/p&gt;
+&lt;p&gt;Now you can see the logical name for the database in the Database files grid under Logical Name column.&lt;/p&gt;
+&lt;p&gt;For Example&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;USE AdventureWorks;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;ALTER&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;DATABASE&lt;/span&gt; AdventureWorks
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; RECOVERY &lt;span style=&#34;color:#66d9ef&#34;&gt;SIMPLE&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;-- Shrink the truncated log file to 1 MB.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;DBCC SHRINKFILE (AdventureWorks_Log, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;);
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;ALTER&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;DATABASE&lt;/span&gt; AdventureWorks
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; RECOVERY &lt;span style=&#34;color:#66d9ef&#34;&gt;FULL&lt;/span&gt;;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;GO&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Here the logical name of the database is “AdventureWorks_Log”.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Windowless ActiveX controls are not supported</title>
+      <link>/post/windowless-activex-controls-are-not-supported/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      <guid>/post/windowless-activex-controls-are-not-supported/</guid>
+      <description>&lt;p&gt;In windows 7 environment you may receive “Unable to get window handle, Windowless ActiveX controls are not supported..” exception, when you display a child form that contains ActiveX user controls. The user control may be a third party control. To avoid this exception you may disable DEP (Data Execution Prevention) for your ActiveX control.&lt;/p&gt;
+&lt;p&gt;DEP (Data Execution Prevention) is a security feature from windows 7 operating system to prevent damage your system from viruses and other security threats. If your user control access memory in an incorrect way, the DEP will close the program.&lt;/p&gt;
+&lt;p&gt;If you trust the user control which you integrated with the application, you may disable the DEP for that program in the following way.&lt;/p&gt;
+&lt;p&gt;Go to Control Panel -&amp;gt; System and Security -&amp;gt; System&lt;/p&gt;
+&lt;p&gt;You will get a list of options on the left side of the window.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;DEP_1.png&#34; alt=&#34;DEP 1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Click on the “Advanced system settings” link. You will get the System properties window.&lt;/p&gt;
+&lt;p&gt;In that System properties window, switch to an Advanced tab and click on the settings button under the Performance section, you will get Performance Options window.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;DEP_2.png&#34; alt=&#34;DEP 2&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Switch to Data Execution Prevention tab and select “Turn on DEP for all programs and services except those I select:” option.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;DEP_3.png&#34; alt=&#34;DEP 3&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now the “Add…” button is enabled, then you can add the specific program which you want to disable the DEP.&lt;/p&gt;
+&lt;p&gt;This changes will apply only after you restart the system.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;DEP_4.png&#34; alt=&#34;DEP 4&#34;&gt;&lt;/p&gt;
+&lt;p&gt;If you want to disable the DEP completely, using the command prompt you need to do the following steps.&lt;/p&gt;
+&lt;p&gt;Select Start Menu -&amp;gt; All Programs -&amp;gt; Accessories.&lt;/p&gt;
+&lt;p&gt;You will see the Command Prompt under Accessories. Right click on the Command Prompt and select “Run as administrator”.&lt;/p&gt;
+&lt;p&gt;Enter the following command and execute it to disable DEP completely.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34; data-lang=&#34;dos&#34;&gt;bcdedit.exe /set {current} nx AlwaysOff
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you want to enable DEP, you need to execute the following command.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34; data-lang=&#34;dos&#34;&gt;bcdedit.exe /set {current} nx AlwaysOn
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;These changes will be affected after you restart the computer.&lt;/p&gt;
+&lt;p&gt;By default, DEP is turned on in windows 7.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

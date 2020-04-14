@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git | GK Views</title>
+    <link>/categories/git/</link>
+      <atom:link href="/categories/git/index.xml" rel="self" type="application/rss+xml" />
+    <description>Git</description><language>en-us</language><copyright>© 2020 GK Views</copyright><lastBuildDate>Sun, 15 Dec 2019 21:08:14 +0530</lastBuildDate>
+    <image>
+      <url>/images/icon_hub57c009c5aaffe3e86e976fb98747594_109132_512x512_fill_lanczos_center_2.png</url>
+      <title>Git</title>
+      <link>/categories/git/</link>
+    </image>
+    
+    <item>
+      <title>Create Two Branches From Same Commit</title>
+      <link>/post/create-two-branches-from-same-commit/</link>
+      <pubDate>Sun, 15 Dec 2019 21:08:14 +0530</pubDate>
+      <guid>/post/create-two-branches-from-same-commit/</guid>
+      <description>&lt;p&gt;To create two different branches with differnt commits from same commit, we can use the below content as batch file.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bat&#34; data-lang=&#34;bat&#34;&gt;git tag temp_tag
+
+:&lt;span style=&#34;color:#75715e&#34;&gt;: To check the list of local branch&lt;/span&gt;
+git branch
+
+git checkout myfirstbranch
+&lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; off
+&lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;This is a Sample File for testing&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;&amp;gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mytestfile1.txt&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; on
+git add &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mytestfile1.txt&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+git commit -m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;added a file in new branch&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+
+:&lt;span style=&#34;color:#75715e&#34;&gt;: Change to root tag&lt;/span&gt;
+git checkout tags/temp_tag
+
+git checkout mysecondbranch
+&lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; off
+&lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;This is another file for testing&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;&amp;gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mytestfile2.txt&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;echo&lt;/span&gt; on
+git add &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;mytestfile2.txt&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+git commit -m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;added another file in another branch&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+
+:&lt;span style=&#34;color:#75715e&#34;&gt;: remove the local temp branch&lt;/span&gt;
+git tag -d temp_tag
+
+:&lt;span style=&#34;color:#75715e&#34;&gt;: push the branches to origin&lt;/span&gt;
+git push origin myfirstbranch:myfirstbranch
+git push origin mysecondbranch:mysecondbranch
+
+:&lt;span style=&#34;color:#75715e&#34;&gt;: checkout to diff branch if you want&lt;/span&gt;
+git checkout develop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To keep the base location (initial commit), a temporay tag is created in local to checkout later. This tag will be deleted from local to avoid further issue.&lt;/p&gt;
+&lt;p&gt;You can also use the Head~1 in checkout instead of tag.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

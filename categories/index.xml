@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories | GK Views</title>
+    <link>/categories/</link>
+      <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <description>Categories</description><language>en-us</language><copyright>© 2020 GK Views</copyright><lastBuildDate>Tue, 14 Jan 2020 08:25:19 +0530</lastBuildDate>
+    <image>
+      <url>/images/icon_hub57c009c5aaffe3e86e976fb98747594_109132_512x512_fill_lanczos_center_2.png</url>
+      <title>Categories</title>
+      <link>/categories/</link>
+    </image>
+    
+    <item>
+      <title>PowerShell</title>
+      <link>/categories/powershell/</link>
+      <pubDate>Tue, 14 Jan 2020 08:25:19 +0530</pubDate>
+      <guid>/categories/powershell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>/categories/git/</link>
+      <pubDate>Sun, 15 Dec 2019 21:08:14 +0530</pubDate>
+      <guid>/categories/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Microsoft SQL</title>
+      <link>/categories/microsoft-sql/</link>
+      <pubDate>Thu, 09 May 2019 22:37:28 +0000</pubDate>
+      <guid>/categories/microsoft-sql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>General</title>
+      <link>/categories/general/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      <guid>/categories/general/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Microsoft .Net</title>
+      <link>/categories/microsoft-.net/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      <guid>/categories/microsoft-.net/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

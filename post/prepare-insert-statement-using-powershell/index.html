@@ -1,0 +1,641 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Source Themes Academic 4.7.0">
+<meta name="author" content="Gobikannan P">
+<meta name="description" content="To prepare insert script for a datatable from MSSQL Server using stored procedure and write the result into a sql file dynamically using powershell script">
+<link rel="alternate" hreflang="en-us" href="/post/prepare-insert-statement-using-powershell/">
+<meta name="theme-color" content="#2962ff">
+<link rel="stylesheet" href="https://www.gkviews.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha512-MCWBwPSput2UWNwyznVFLbD2iUc1e5VsdD1zahsWVzkDSUzyHhMZ4kCS3wgYSRm0mU+glwD/Q9lSJrDPwbUL2A" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.gkviews.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha512-jrDXSF9AvYxucIemk/2r7ntYBCMYWlNwl9D+DeL+3CxpbWC+JEwU3FTGFFLKm62s1ybn9hO5BImk6z0vTV3jdA==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.gkviews.com/ajax/libs/highlight.js/9.15.6/styles/vs2015.min.css" crossorigin="anonymous" title="hl-light">
+<link rel="stylesheet" href="https://www.gkviews.com/ajax/libs/highlight.js/9.15.6/styles/vs2015.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+<link rel="stylesheet" href="https://www.gkviews.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+<link rel="stylesheet" href="/css/academic.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-75673464-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           document.location = url;
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target);  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-75673464-1', { 'anonymize_ip': true });
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+<link rel="manifest" href="/index.webmanifest">
+<link rel="icon" type="image/png" href="/images/icon_hub57c009c5aaffe3e86e976fb98747594_109132_32x32_fill_lanczos_center_2.png">
+<link rel="apple-touch-icon" type="image/png" href="/images/icon_hub57c009c5aaffe3e86e976fb98747594_109132_192x192_fill_lanczos_center_2.png">
+<link rel="canonical" href="/post/prepare-insert-statement-using-powershell/">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:site" content="@gobikannanp">
+<meta property="twitter:creator" content="@gobikannanp">
+<meta property="og:site_name" content="GK Views">
+<meta property="og:url" content="/post/prepare-insert-statement-using-powershell/">
+<meta property="og:title" content="Prepare Insert Statement Using Powershell | GK Views">
+<meta property="og:description" content="To prepare insert script for a datatable from MSSQL Server using stored procedure and write the result into a sql file dynamically using powershell script"><meta property="og:image" content="/post/prepare-insert-statement-using-powershell/featured.jpg">
+<meta property="twitter:image" content="/post/prepare-insert-statement-using-powershell/featured.jpg"><meta property="og:locale" content="en-us">
+<meta property="article:published_time" content="2019-05-09T22:37:28&#43;00:00">
+<meta property="article:modified_time" content="2019-05-09T22:37:28&#43;00:00">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/prepare-insert-statement-using-powershell/"
+  },
+  "headline": "Prepare Insert Statement Using Powershell",
+  
+  "image": [
+    "/post/prepare-insert-statement-using-powershell/featured.jpg"
+  ],
+  
+  "datePublished": "2019-05-09T22:37:28Z",
+  "dateModified": "2019-05-09T22:37:28Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Gobikannan P"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "GK Views",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "img//"
+    }
+  },
+  "description": "To prepare insert script for a datatable from MSSQL Server using stored procedure and write the result into a sql file dynamically using powershell script"
+}
+</script>
+<link rel="stylesheet" href="//www.gkviews.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+<script src="https://www.gkviews.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener("load", function () {
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#2962ff",
+          "text": "#fff"
+        },
+        "button": {
+          "background": "#fff",
+          "text": "#2962ff"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": "By using our site, you acknowledge that you have read and understand our",
+    "dismiss": "Close and Accept",
+    "link": "Cookie Policy and Privacy Policy.",
+    "href": "/privacy/"
+      }
+    })});
+</script>
+<title>Prepare Insert Statement Using Powershell | GK Views</title>
+</head>
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+<aside class="search-results" id="search">
+<div class="container">
+<section class="search-header">
+<div class="row no-gutters justify-content-between mb-3">
+<div class="col-6">
+<h1>Search</h1>
+</div>
+<div class="col-6 col-search-close">
+<a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+</div>
+</div>
+<div id="search-box">
+<input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+</div>
+</section>
+<section class="section-search-results">
+<div id="search-hits">
+</div>
+</section>
+</div>
+</aside>
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+<div class="container">
+<div class="d-none d-lg-inline-flex">
+<a class="navbar-brand" href="/">GK Views</a>
+</div>
+<button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+<span><i class="fas fa-bars"></i></span>
+</button>
+<div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+<a class="navbar-brand" href="/">GK Views</a>
+</div>
+<div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+<ul class="navbar-nav d-md-inline-flex">
+<li class="nav-item">
+<a class="nav-link  active" href="/"><i class="fas fa-home" style="color: #00d1b2;"></i> <span>Home</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link  active" href="/post/"><i class="fas fa-newspaper" style="color: #00d1b2;"></i> <span>Blog</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link " href="/categories/"><i class="fas fa-sitemap" style="color: #00d1b2;"></i> <span>Categories</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link " href="/about/"><i class="fas fa-id-card" style="color: #00d1b2;"></i> <span>About</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link " href="/about/#contact"><i class="fas fa-envelope" style="color: #00d1b2;"></i> <span>Contact</span></a>
+</li>
+</ul>
+</div>
+<ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+<li class="nav-item">
+<a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+</li>
+<li class="nav-item">
+<a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+</li>
+</ul>
+</div>
+</nav>
+<article class="article">
+<div class="article-container pt-3">
+<h1>Prepare Insert Statement Using Powershell</h1>
+<p class="page-subtitle">How to prepare insert script using powershell script from SQL Server Datatable</p>
+<div class="article-metadata">
+<div>
+<span><a href="/authors/gobikannan/">Gobikannan P</a></span>
+</div>
+<span class="article-date">
+    
+    
+      
+    
+    May 9, 2019
+  </span>
+<span class="middot-divider"></span>
+<span class="article-reading-time">
+    6 min read
+  </span>
+<span class="middot-divider"></span>
+<a href="/post/prepare-insert-statement-using-powershell/#disqus_thread"></a>
+<span class="middot-divider"></span>
+<span class="article-categories">
+<i class="fas fa-folder mr-1"></i><a href="/categories/powershell/">PowerShell</a>, <a href="/categories/microsoft-sql/">Microsoft SQL</a></span>
+</div>
+</div>
+<div class="article-container">
+<div class="article-style">
+<p>In my previous post I have explained, how we can connect to SQL Server database and execute stored procedure from the powershell. If you missed it here is the link : <a href="/post/create-insert-script-from-ms-sql-table/">Execute Storedprocedure in Powershell</a></p>
+<p>Lets take the same example where we used for <a href="/post/create-insert-script-from-ms-sql-table/">Create Insert Script From MS Sql Table</a></p>
+<p>The create script for the table in the example is</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
+<span style="color:#66d9ef">SET</span> ANSI_NULLS <span style="color:#66d9ef">ON</span>
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">SET</span> QUOTED_IDENTIFIER <span style="color:#66d9ef">ON</span>
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> [dbo].[MyTable1](
+	[Id] [int] <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+	[Name] [nvarchar](<span style="color:#ae81ff">255</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+	[Age] [int] <span style="color:#66d9ef">NULL</span>,
+	[Address] [nvarchar](<span style="color:#ae81ff">255</span>) <span style="color:#66d9ef">NULL</span>,
+	[City] [nvarchar](<span style="color:#ae81ff">50</span>) <span style="color:#66d9ef">NULL</span>,
+ <span style="color:#66d9ef">CONSTRAINT</span> [PK_MyTable1] <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> CLUSTERED 
+(
+	[Id] <span style="color:#66d9ef">ASC</span>
+)<span style="color:#66d9ef">WITH</span> (PAD_INDEX <span style="color:#f92672">=</span> <span style="color:#66d9ef">OFF</span>, STATISTICS_NORECOMPUTE <span style="color:#f92672">=</span> <span style="color:#66d9ef">OFF</span>, IGNORE_DUP_KEY <span style="color:#f92672">=</span> <span style="color:#66d9ef">OFF</span>, ALLOW_ROW_LOCKS <span style="color:#f92672">=</span> <span style="color:#66d9ef">ON</span>, ALLOW_PAGE_LOCKS <span style="color:#f92672">=</span> <span style="color:#66d9ef">ON</span>) <span style="color:#66d9ef">ON</span> [<span style="color:#66d9ef">PRIMARY</span>]
+)
+<span style="color:#66d9ef">GO</span>
+</code></pre></div><p>We are going to convert the table row data to insert script using a stored procedure. Each data will be converted to string based on its datatype.</p>
+<p>For that I'm going to use a function named &ldquo;FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT&rdquo; which returns a string which converts the data to string based on the column datatype.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">
+<span style="color:#66d9ef">SET</span> ANSI_NULLS <span style="color:#66d9ef">ON</span>
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">SET</span> QUOTED_IDENTIFIER <span style="color:#66d9ef">ON</span>
+<span style="color:#66d9ef">GO</span>
+<span style="color:#75715e">-- =============================================
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- Author: Gobikannan P
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- Create date: 01 May 2019
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- Description: To Get the column string for insert script generation
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- =============================================
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">FUNCTION</span> [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] 
+(
+	<span style="color:#f92672">@</span>ColumnName sysname, <span style="color:#f92672">@</span>DataType varchar(<span style="color:#ae81ff">128</span>), <span style="color:#f92672">@</span>IncludeTimestamp bit <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+)
+<span style="color:#66d9ef">RETURNS</span> NVARCHAR(<span style="color:#66d9ef">MAX</span>)
+<span style="color:#66d9ef">AS</span>
+<span style="color:#66d9ef">BEGIN</span>
+<span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span>RetVal NVARCHAR(<span style="color:#66d9ef">MAX</span>)
+	<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span>RetVal <span style="color:#f92672">=</span>
+<span style="color:#66d9ef">CASE</span>
+<span style="color:#66d9ef">WHEN</span> <span style="color:#f92672">@</span>DataType <span style="color:#66d9ef">IN</span> (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">char</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">varchar</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">nchar</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">nvarchar</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">sysname</span><span style="color:#e6db74">&#39;</span>) 
+			<span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">COALESCE(</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74"> + REPLACE(RTRIM(</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>ColumnName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">),</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">)+</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">NULL</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">WHEN</span> <span style="color:#f92672">@</span>DataType <span style="color:#66d9ef">IN</span> (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">datetime</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">smalldatetime</span><span style="color:#e6db74">&#39;</span>) 
+			<span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">COALESCE(</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74"> + RTRIM(CONVERT(char,</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>ColumnName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">,109))+</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">NULL</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">WHEN</span> <span style="color:#f92672">@</span>DataType <span style="color:#66d9ef">IN</span> (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">uniqueidentifier</span><span style="color:#e6db74">&#39;</span>) 
+			<span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">COALESCE(</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74"> + REPLACE(CONVERT(char(255),RTRIM(</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>ColumnName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">)),</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">)+</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">NULL</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">WHEN</span> <span style="color:#f92672">@</span>DataType <span style="color:#66d9ef">IN</span> (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">text</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ntext</span><span style="color:#e6db74">&#39;</span>) 
+			<span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">COALESCE(</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74"> + REPLACE(CONVERT(char(8000),</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>ColumnName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">),</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">)+</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">NULL</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">WHEN</span> <span style="color:#f92672">@</span>DataType <span style="color:#66d9ef">IN</span> (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">binary</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">varbinary</span><span style="color:#e6db74">&#39;</span>) 
+			<span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">COALESCE(RTRIM(CONVERT(char,</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CONVERT(int,</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>ColumnName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">))),</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">NULL</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">WHEN</span> <span style="color:#f92672">@</span>DataType <span style="color:#66d9ef">IN</span> (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">timestamp</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">rowversion</span><span style="color:#e6db74">&#39;</span>) 
+			<span style="color:#66d9ef">THEN</span>
+<span style="color:#66d9ef">CASE</span>
+<span style="color:#66d9ef">WHEN</span> <span style="color:#f92672">@</span>IncludeTimestamp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">DEFAULT</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">ELSE</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">COALESCE(RTRIM(CONVERT(char,</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CONVERT(int,</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">@</span>ColumnName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">))),</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">NULL</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">END</span>
+<span style="color:#66d9ef">WHEN</span> <span style="color:#f92672">@</span>DataType <span style="color:#66d9ef">IN</span> (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">float</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">real</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">money</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">smallmoney</span><span style="color:#e6db74">&#39;</span>)
+			<span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">COALESCE(LTRIM(RTRIM(</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CONVERT(char, </span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>  <span style="color:#f92672">@</span>ColumnName  <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">,2)</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">)),</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">NULL</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">ELSE</span>  <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">COALESCE(LTRIM(RTRIM(</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CONVERT(char, </span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>  <span style="color:#f92672">@</span>ColumnName  <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">)),</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">NULL</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">END</span>   <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>  <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> + </span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">RETURN</span> <span style="color:#f92672">@</span>RetVal
+<span style="color:#66d9ef">END</span>
+<span style="color:#66d9ef">GO</span>
+</code></pre></div><p>Below stored procedure uses the above function to construct insert statement from column. If you have any additional columns which you want to insert as NULL then need to use a constant value instead of calling the above function.</p>
+<p>In the blow stored procedure script &lsquo;MaritalStatus&rsquo; column is added with NULL value.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SET</span> ANSI_NULLS <span style="color:#66d9ef">ON</span>
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">SET</span> QUOTED_IDENTIFIER <span style="color:#66d9ef">ON</span>
+<span style="color:#66d9ef">GO</span>
+<span style="color:#75715e">-- =============================================
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- Author:		Gobikannan Ponmalai
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- Create date: 01 May 2019
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- Description:	To create insert script from database table
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- =============================================
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">PROCEDURE</span> [dbo].[SP_INSERTSCRIPT_FROM_DATATABLE]
+	<span style="color:#f92672">@</span>AgeLimit int
+<span style="color:#66d9ef">AS</span>
+<span style="color:#66d9ef">BEGIN</span>
+<span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span>InsertStatement varchar(<span style="color:#66d9ef">max</span>),<span style="color:#f92672">@</span>INCLUDENULLCOLUMN varchar(<span style="color:#ae81ff">100</span>) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">NULL</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>  <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> + </span><span style="color:#e6db74">&#39;</span>, <span style="color:#f92672">@</span>ColScriptConstructed NVARCHAR(<span style="color:#66d9ef">max</span>) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span>ResultInsertQuery <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">TABLE</span>(InsertQuery NVARCHAR(<span style="color:#66d9ef">MAX</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>)
+
+	<span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> (<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> MyTable1)
+	<span style="color:#66d9ef">BEGIN</span>
+<span style="color:#66d9ef">SELECT</span>  <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-- Info : There is no row found in the Table to convert insert script</span><span style="color:#e6db74">&#39;</span> <span style="color:#66d9ef">AS</span> [InsertResult]
+		<span style="color:#66d9ef">RETURN</span>
+<span style="color:#66d9ef">END</span>
+<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>InsertStatement <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">INSERT INTO [dbo].[MyTable2]([Id],[Name],[Age],[MaritalStatus],[Address],[City]) VALUES </span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span><span style="color:#f92672">=</span>  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Id</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">int</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>) <span style="color:#75715e">-- [Id]
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span><span style="color:#f92672">=</span>  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Name</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">nvarchar</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>) <span style="color:#75715e">-- [Name]
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span><span style="color:#f92672">=</span>  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Age</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">int</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>) <span style="color:#75715e">-- [Age]	
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span><span style="color:#f92672">=</span>  <span style="color:#f92672">@</span>INCLUDENULLCOLUMN  <span style="color:#75715e">-- [MaritalStatus]
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span><span style="color:#f92672">=</span>  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Address</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">nvarchar</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>) <span style="color:#75715e">-- [Address]
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span><span style="color:#f92672">=</span>  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">City</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">varchar</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>) <span style="color:#75715e">-- [City]
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">=</span> <span style="color:#66d9ef">LEFT</span>(<span style="color:#f92672">@</span>ColScriptConstructed,len(<span style="color:#f92672">@</span>ColScriptConstructed) <span style="color:#f92672">-</span> <span style="color:#ae81ff">6</span>)
+	<span style="color:#75715e">-- SELECT @ColScriptConstructed
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SELECT </span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>
+<span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">(</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">+ </span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>  <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>
+<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+ </span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74"> AS InsQueryVal FROM [dbo].[MyTable1] WHERE Age &gt; @Age</span><span style="color:#e6db74">&#39;</span> 
+	print <span style="color:#f92672">@</span>ColScriptConstructed
+
+	<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> <span style="color:#f92672">@</span>ResultInsertQuery(InsertQuery)
+	<span style="color:#66d9ef">EXEC</span> sp_executesql <span style="color:#f92672">@</span>ColScriptConstructed,N<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">@Age int</span><span style="color:#e6db74">&#39;</span>, <span style="color:#f92672">@</span>AgeLimit
+
+	<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span>InsertStatement <span style="color:#f92672">+</span> CHAR(<span style="color:#ae81ff">13</span>)<span style="color:#f92672">+</span>CHAR(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">+</span> InsertQuery <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">;</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> CHAR(<span style="color:#ae81ff">13</span>)<span style="color:#f92672">+</span>CHAR(<span style="color:#ae81ff">10</span>) <span style="color:#66d9ef">AS</span> [InsertResult] <span style="color:#66d9ef">FROM</span> <span style="color:#f92672">@</span>ResultInsertQuery
+<span style="color:#66d9ef">END</span>
+<span style="color:#66d9ef">GO</span>
+</code></pre></div><p>Now you can use this stored procedure to get the datatable to insert scripts in each rows.  As we've seen earlier, we could call this stored procedure usnig powershell script as like below</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#75715e"># To connect to SQL Server and execute stored procedure using powershell&#34;</span>
+$databaseServerName = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">localhost</span><span style="color:#e6db74">&#34;</span>
+$databaseName = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">databaseName</span><span style="color:#e6db74">&#34;</span>
+$databaseUsername = <span style="color:#e6db74">&#39;userName&#39;</span>
+$dbUserPassword = <span style="color:#e6db74">&#39;&lt;PasswordHere&gt;&#39;</span>
+$connectionTO = 120
+
+<span style="color:#75715e"># you can use different option to do the parameter value processing</span>
+$ageLimit = 31
+<span style="color:#75715e"># Variable to hold current file directory</span>
+<span style="color:#75715e">#$scriptPath = split-path -parent $MyInvocation.MyCommand.Definition</span>
+$scriptPath = $PSScriptRoot
+$dateInFormat = (Get-Date).ToString(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">yyyyMMdd_HHmmss</span><span style="color:#e6db74">&#34;</span>)
+
+$DatabaseConnectionString = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Server=</span><span style="color:#e6db74">$</span><span style="color:#e6db74">databaseServerName; Database=</span><span style="color:#e6db74">$</span><span style="color:#e6db74">databaseName; User Id=</span><span style="color:#e6db74">$</span><span style="color:#e6db74">databaseUsername; Password=</span><span style="color:#e6db74">$</span><span style="color:#e6db74">dbUserPassword;Connection Timeout=</span><span style="color:#e6db74">$</span><span style="color:#e6db74">connectionTO;</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">try</span> {
+    $SqlConnection = New-Object System.Data.SqlClient.SqlConnection
+    $SqlConnection.ConnectionString = $DatabaseConnectionString
+
+    $SqlCommand = New-Object System.Data.SqlClient.SqlCommand
+    $SqlCommand.Connection = $SqlConnection
+    $SqlCommand.CommandText = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">SP_INSERTSCRIPT_FROM_DATATABLE</span><span style="color:#e6db74">&#34;</span>
+    $SqlCommand.CommandType = <span style="color:#66d9ef">[System.Data.CommandType]</span>::StoredProcedure
+    $SqlCommand.Parameters.AddWithValue(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">@AgeLimit</span><span style="color:#e6db74">&#34;</span>, $ageLimit)
+
+    $DataSet = New-Object System.Data.DataSet
+    $SqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter($SqlCommand)
+    $SqlAdapter.Fill($DataSet)
+    <span style="color:#66d9ef">if</span> ($conn.State <span style="color:#f92672">-eq</span> <span style="color:#66d9ef">[System.Data.ConnectionState]</span>::Open) {
+        $SqlConnection.Close()
+    }
+    <span style="color:#66d9ef">if</span> (($null <span style="color:#f92672">-ne</span> $DataSet) <span style="color:#f92672">-and</span> ($DataSet.Tables.Count <span style="color:#f92672">-gt</span> 0)) {
+        $resultTable = $DataSet.Tables[0]
+        <span style="color:#66d9ef">if</span> ($resultTable.Rows.Count <span style="color:#f92672">-gt</span> 0) {
+            $OutPutFilePath = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$</span><span style="color:#e6db74">scriptPath\SQLInsertQuery_Result_</span><span style="color:#e6db74">$</span><span style="color:#e6db74">{dateInFormat}.sql</span><span style="color:#e6db74">&#34;</span>
+            Write-Host <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Result Row Count :</span><span style="color:#e6db74">&#34;</span> $resultTable.Rows.Count
+            <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">-- Insert script created on  </span><span style="color:#e6db74">$</span><span style="color:#e6db74">{dateInFormat}</span><span style="color:#e6db74">&#34;</span> | Out-File $OutPutFilePath  -Encoding ascii
+            <span style="color:#66d9ef">foreach</span> ($row <span style="color:#66d9ef">in</span> $resultTable.Rows) {
+                $row[<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">InsertResult</span><span style="color:#e6db74">&#34;</span>] | Out-File $OutPutFilePath -Append -Encoding ascii
+            }
+        }
+        <span style="color:#66d9ef">else</span> {
+            Write-Host <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">No rows found</span><span style="color:#e6db74">&#34;</span>
+        }
+    }
+   
+}
+<span style="color:#66d9ef">catch</span> {
+    Write-Error $_.Exception.Message 
+}
+
+</code></pre></div><p>The result will be as like below</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- Insert script created on  20190501_231339
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> [dbo].[MyTable2]([Id],[Name],[Age],[MaritalStatus],[Address],[City]) <span style="color:#66d9ef">VALUES</span> 
+(<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Will Smith</span><span style="color:#e6db74">&#39;</span>,<span style="color:#ae81ff">50</span>,<span style="color:#66d9ef">NULL</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Philadelphia, Pennsylvania, USA</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Philadelphia</span><span style="color:#e6db74">&#39;</span>);
+
+<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> [dbo].[MyTable2]([Id],[Name],[Age],[MaritalStatus],[Address],[City]) <span style="color:#66d9ef">VALUES</span> 
+(<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Leonardo DiCaprio</span><span style="color:#e6db74">&#39;</span>,<span style="color:#ae81ff">44</span>,<span style="color:#66d9ef">NULL</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Hollywood, Los Angeles, California, USA</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Los Angeles</span><span style="color:#e6db74">&#39;</span>);
+
+<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> [dbo].[MyTable2]([Id],[Name],[Age],[MaritalStatus],[Address],[City]) <span style="color:#66d9ef">VALUES</span> 
+(<span style="color:#ae81ff">3</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Ben Kingsley</span><span style="color:#e6db74">&#39;</span>,<span style="color:#ae81ff">75</span>,<span style="color:#66d9ef">NULL</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Scarborough, Yorkshire, England, UK</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Scarborough</span><span style="color:#e6db74">&#39;</span>);
+
+</code></pre></div><p>You can create stored procedure as like below to create multi value insert script.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SET</span> ANSI_NULLS <span style="color:#66d9ef">ON</span>
+<span style="color:#66d9ef">GO</span>
+<span style="color:#66d9ef">SET</span> QUOTED_IDENTIFIER <span style="color:#66d9ef">ON</span>
+<span style="color:#66d9ef">GO</span>
+<span style="color:#75715e">-- =============================================
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- Author:		Gobikannan Ponmalai
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- Create date: 01 May 2019
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- Description:	To create insert script from database table
+</span><span style="color:#75715e"></span><span style="color:#75715e">-- =============================================
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">PROCEDURE</span> [dbo].[SP_MULTI_INSERTSCRIPT_FROM_DATATABLE]
+	<span style="color:#f92672">@</span>AgeLimit int
+<span style="color:#66d9ef">AS</span>
+<span style="color:#66d9ef">BEGIN</span>
+<span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span>InsertStatement varchar(<span style="color:#66d9ef">max</span>),<span style="color:#f92672">@</span>INCLUDENULLCOLUMN varchar(<span style="color:#ae81ff">100</span>) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">NULL</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>  <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> + </span><span style="color:#e6db74">&#39;</span>, <span style="color:#f92672">@</span>ColScriptConstructed NVARCHAR(<span style="color:#66d9ef">max</span>) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">DECLARE</span> <span style="color:#f92672">@</span>ResultInsertQuery <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">TABLE</span>(InsertQuery NVARCHAR(<span style="color:#66d9ef">MAX</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>)
+
+	<span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> (<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> MyTable1)
+	<span style="color:#66d9ef">BEGIN</span>
+<span style="color:#66d9ef">SELECT</span>  <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">-- Info : There is no row found in the Table to convert insert script</span><span style="color:#e6db74">&#39;</span> <span style="color:#66d9ef">AS</span> [InsertResult]
+		<span style="color:#66d9ef">RETURN</span>
+<span style="color:#66d9ef">END</span>
+<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>InsertStatement <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">INSERT INTO [dbo].[MyTable2]([Id],[Name],[Age],[MaritalStatus],[Address],[City]) VALUES </span><span style="color:#e6db74">&#39;</span>
+<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span><span style="color:#f92672">=</span>  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Id</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">int</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>) <span style="color:#75715e">-- [Id]
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span><span style="color:#f92672">=</span>  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Name</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">nvarchar</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>) <span style="color:#75715e">-- [Name]
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span><span style="color:#f92672">=</span>  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Age</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">int</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>) <span style="color:#75715e">-- [Age]	
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span><span style="color:#f92672">=</span>  <span style="color:#f92672">@</span>INCLUDENULLCOLUMN  <span style="color:#75715e">-- [MaritalStatus]
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span><span style="color:#f92672">=</span>  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Address</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">nvarchar</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>) <span style="color:#75715e">-- [Address]
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span><span style="color:#f92672">=</span>  [dbo].[FN_FORMAT_COLUMN_FOR_INSERT_SCRIPT_STMT] (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">City</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">varchar</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">0</span>) <span style="color:#75715e">-- [City]
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">=</span> <span style="color:#66d9ef">LEFT</span>(<span style="color:#f92672">@</span>ColScriptConstructed,len(<span style="color:#f92672">@</span>ColScriptConstructed) <span style="color:#f92672">-</span> <span style="color:#ae81ff">6</span>)
+	<span style="color:#75715e">-- SELECT @ColScriptConstructed
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">SET</span> <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SELECT </span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>
+<span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">(</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">+ </span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>  <span style="color:#f92672">@</span>ColScriptConstructed <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> </span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span>
+<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">+ </span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#e6db74"> AS InsQueryVal FROM [dbo].[MyTable1] WHERE Age &gt; @Age</span><span style="color:#e6db74">&#39;</span> 
+	print <span style="color:#f92672">@</span>ColScriptConstructed
+
+	<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> <span style="color:#f92672">@</span>ResultInsertQuery(InsertQuery)
+	<span style="color:#66d9ef">EXEC</span> sp_executesql <span style="color:#f92672">@</span>ColScriptConstructed,N<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">@Age int</span><span style="color:#e6db74">&#39;</span>, <span style="color:#f92672">@</span>AgeLimit
+
+	<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@</span>InsertStatement <span style="color:#f92672">+</span> CHAR(<span style="color:#ae81ff">13</span>)<span style="color:#f92672">+</span>CHAR(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">+</span> STRING_AGG(InsertQuery, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> CHAR(<span style="color:#ae81ff">13</span>)<span style="color:#f92672">+</span>CHAR(<span style="color:#ae81ff">10</span>)) <span style="color:#66d9ef">AS</span> [InsertResult] <span style="color:#66d9ef">FROM</span> <span style="color:#f92672">@</span>ResultInsertQuery
+
+<span style="color:#66d9ef">END</span>
+<span style="color:#66d9ef">GO</span>
+</code></pre></div><p>The result will be as like below</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- Insert script created on  20190501_232250
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> [dbo].[MyTable2]([Id],[Name],[Age],[MaritalStatus],[Address],[City]) <span style="color:#66d9ef">VALUES</span> 
+(<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Will Smith</span><span style="color:#e6db74">&#39;</span>,<span style="color:#ae81ff">50</span>,<span style="color:#66d9ef">NULL</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Philadelphia, Pennsylvania, USA</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Philadelphia</span><span style="color:#e6db74">&#39;</span>),
+(<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Leonardo DiCaprio</span><span style="color:#e6db74">&#39;</span>,<span style="color:#ae81ff">44</span>,<span style="color:#66d9ef">NULL</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Hollywood, Los Angeles, California, USA</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Los Angeles</span><span style="color:#e6db74">&#39;</span>),
+(<span style="color:#ae81ff">3</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Ben Kingsley</span><span style="color:#e6db74">&#39;</span>,<span style="color:#ae81ff">75</span>,<span style="color:#66d9ef">NULL</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Scarborough, Yorkshire, England, UK</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Scarborough</span><span style="color:#e6db74">&#39;</span>)
+
+</code></pre></div>
+</div>
+<div class="article-tags">
+<a class="badge badge-light" href="/tags/powershell/">PowerShell</a>
+<a class="badge badge-light" href="/tags/ms-sql/">MS SQL</a>
+</div>
+<div class="share-box" aria-hidden="true">
+<ul class="share">
+<li>
+<a href="https://twitter.com/intent/tweet?url=/post/prepare-insert-statement-using-powershell/&amp;text=Prepare%20Insert%20Statement%20Using%20Powershell" target="_blank" rel="noopener" class="share-btn-twitter">
+<i class="fab fa-twitter"></i>
+</a>
+</li>
+<li>
+<a href="https://www.facebook.com/sharer.php?u=/post/prepare-insert-statement-using-powershell/&amp;t=Prepare%20Insert%20Statement%20Using%20Powershell" target="_blank" rel="noopener" class="share-btn-facebook">
+<i class="fab fa-facebook"></i>
+</a>
+</li>
+<li>
+<a href="mailto:?subject=Prepare%20Insert%20Statement%20Using%20Powershell&amp;body=/post/prepare-insert-statement-using-powershell/" target="_blank" rel="noopener" class="share-btn-email">
+<i class="fas fa-envelope"></i>
+</a>
+</li>
+<li>
+<a href="https://www.linkedin.com/shareArticle?url=/post/prepare-insert-statement-using-powershell/&amp;title=Prepare%20Insert%20Statement%20Using%20Powershell" target="_blank" rel="noopener" class="share-btn-linkedin">
+<i class="fab fa-linkedin-in"></i>
+</a>
+</li>
+<li>
+<a href="https://web.whatsapp.com/send?text=Prepare%20Insert%20Statement%20Using%20Powershell%20/post/prepare-insert-statement-using-powershell/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+<i class="fab fa-whatsapp"></i>
+</a>
+</li>
+<li>
+<a href="https://service.weibo.com/share/share.php?url=/post/prepare-insert-statement-using-powershell/&amp;title=Prepare%20Insert%20Statement%20Using%20Powershell" target="_blank" rel="noopener" class="share-btn-weibo">
+<i class="fab fa-weibo"></i>
+</a>
+</li>
+</ul>
+</div>
+<div class="media author-card content-widget-hr">
+<img class="portrait mr-3" src="/authors/gobikannan/avatar_hu5d177f1f755834e43d268661af171292_31491_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+<div class="media-body">
+<h5 class="card-title"><a href="/">Gobikannan P</a></h5>
+<ul class="network-icon" aria-hidden="true">
+<li>
+<a href="/about/#contact" >
+<i class="fas fa-envelope"></i>
+</a>
+</li>
+<li>
+<a href="https://linkedin.com/in/gobikannan" target="_blank" rel="noopener">
+<i class="fab fa-linkedin"></i>
+</a>
+</li>
+<li>
+<a href="https://twitter.com/gobikannanp" target="_blank" rel="noopener">
+<i class="fab fa-twitter"></i>
+</a>
+</li>
+<li>
+<a href="https://www.facebook.com/gkviews" target="_blank" rel="noopener">
+<i class="fab fa-facebook"></i>
+</a>
+</li>
+<li>
+<a href="https://github.com/gobikannanp" target="_blank" rel="noopener">
+<i class="fab fa-github"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<section id="comments">
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "gkviews-com" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+<div class="article-widget">
+<div class="post-nav">
+<div class="post-nav-item">
+<div class="meta-nav">Next</div>
+<a href="/post/how-to-get-dotnet-version-using-powershell/" rel="next">How to Get Dotnet Version Using Powershell</a>
+</div>
+<div class="post-nav-item">
+<div class="meta-nav">Previous</div>
+<a href="/post/create-insert-script-from-ms-sql-table/" rel="prev">Create Insert Script From MS Sql Table</a>
+</div>
+</div>
+</div>
+<div class="article-widget content-widget-hr">
+<h3>Related</h3>
+<ul>
+<li><a href="/post/execute-storedprocedure-in-powershell/">Execute Storedprocedure in Powershell</a></li>
+<li><a href="/post/create-insert-script-from-ms-sql-table/">Create Insert Script From MS Sql Table</a></li>
+<li><a href="/post/shrinking-database-log-file-to-specific-size/">Shrinking database log file to specific size</a></li>
+</ul>
+</div>
+</div>
+</article>
+<script src="https://www.gkviews.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha512-9anGruNHwVXk3XlsUXFrdEe8Iq5EdB/Otrz+4C+VWtQGPThhPyQRCKPh8+H1QPyu2NmEi5oPuCPACVXPmhnvrQ==" crossorigin="anonymous"></script>
+<script src="https://www.gkviews.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-YnVV1FVAXjDnf9DlG72e8HDnlk1hzjfWGl2tZda8yoCZVtGN9Guz4tfFAtaQqxei58wcrrB6miw6VRm5JfvZcQ==" crossorigin="anonymous"></script>
+<script src="https://www.gkviews.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha512-xjShKeqaJ90iyDgrRqlPB0ZQAfJqAncHhJ1gtALyFHDuXzKdRpAghPMXcFzaWHPu7SLQYk7iEiDojwnSPzFwOQ==" crossorigin="anonymous"></script>
+<script src="https://www.gkviews.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha512-oxNUORGPD53KzWjmF0Sktqxx+Gr5RVGsKextFJhP5cZutwSE967eT8gJKK6abs0A1Rrfx4XJeNO4FGkloDh01g==" crossorigin="anonymous"></script>
+<script src="https://www.gkviews.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha512-K/PPA3FHIT6+1jvDUxMKEb7stRpe+q0spW5TcFIs4yWS8m3nbqh1ytRyfshl2XABZt0xCMxx6DWzcfGD6M57wg==" crossorigin="anonymous"></script>
+<script src="https://www.gkviews.com/ajax/libs/highlight.js/9.15.6/languages/powershell.min.js"></script>
+<script src="https://www.gkviews.com/ajax/libs/highlight.js/9.15.6/languages/cs.min.js"></script>
+<script src="https://www.gkviews.com/ajax/libs/highlight.js/9.15.6/languages/dos.min.js"></script>
+<script src="https://www.gkviews.com/ajax/libs/highlight.js/9.15.6/languages/sql.min.js"></script>
+<script src="https://www.gkviews.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-KretHuWptpeGCxkUj+QymEZFDTbq4z0wwYpgjZw/GAk7O2Km+WKAyt+7HMZE4W/0IBo2oa90iOhhCD2hHsnP0A==" crossorigin="anonymous"></script>
+<script>const code_highlighting = true;</script>
+<script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+<script id="search-hit-fuse-template" type="text/x-template">
+<div class="search-hit" id="summary-{{key}}">
+<div class="search-hit-content">
+<div class="search-hit-name">
+<a href="{{relpermalink}}">{{title}}</a>
+<div class="article-metadata search-hit-type">{{type}}</div>
+<p class="search-hit-description">{{snippet}}</p>
+</div>
+</div>
+</div>
+</script>
+<script src="https://www.gkviews.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha512-QTJvV/G6QT0CkP6lw+obu7zctyJ9BEd+7VOCcDI9drUixtHI/JwO0HcwLbShNXmGb7VG+2U8Uikse08TU6ptlQ==" crossorigin="anonymous"></script>
+<script src="https://www.gkviews.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-wQzPCdXE40+sFVfBCH4h2RH8RcnWvQcw0rTfiMayDXV1TanIkDENRccaxHTZE5M6tLv21R8Hz0gLCX4CJyUVbg==" crossorigin="anonymous"></script>
+<script id="dsq-count-scr" src="https://gkviews-com.disqus.com/count.js" async></script>
+<script src="/js/academic.min.a0d331bcd05dbe8b31e244f796710f08.js"></script>
+<div class="container">
+<footer class="site-footer">
+<p class="powered-by">
+    © 2020 GK Views &middot; 
+
+    
+    
+    <span class="float-right" aria-hidden="true">
+<a href="#" class="back-to-top">
+<span class="button_icon">
+<i class="fas fa-arrow-circle-up fa-2x"></i>
+</span>
+</a>
+</span>
+<a href="/privacy/">Privacy Policy</a>
+</p>
+</footer>
+</div>
+<div id="modal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title">Cite</h5>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<pre><code class="tex hljs"></code></pre>
+</div>
+<div class="modal-footer">
+<a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+<i class="fas fa-copy"></i> Copy
+        </a>
+<a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+<i class="fas fa-download"></i> Download
+        </a>
+<div id="modal-error"></div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+

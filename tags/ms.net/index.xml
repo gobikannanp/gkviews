@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MS.Net | GK Views</title>
+    <link>/tags/ms.net/</link>
+      <atom:link href="/tags/ms.net/index.xml" rel="self" type="application/rss+xml" />
+    <description>MS.Net</description><language>en-us</language><copyright>© 2020 GK Views</copyright><lastBuildDate>Thu, 25 May 2017 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hub57c009c5aaffe3e86e976fb98747594_109132_512x512_fill_lanczos_center_2.png</url>
+      <title>MS.Net</title>
+      <link>/tags/ms.net/</link>
+    </image>
+    
+    <item>
+      <title>Connection string from app.config in windows application</title>
+      <link>/post/connection-string-from-app-config-in-windows-application/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      <guid>/post/connection-string-from-app-config-in-windows-application/</guid>
+      <description>&lt;p&gt;In windows application configuration file, connection strings for your database can be stored as key/value pairs in the connectionStrings section of the configuration element.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;configuration&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;connectionStrings&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;add&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MyDBConnection&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;connectionString=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Server=xxxx; UID=xxxx; PWD=xxxx; Database=xxxx;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/connectionStrings&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To access your connection string from the configuration file you need to use the following code.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cs&#34; data-lang=&#34;cs&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt; connectionString = ConfigurationManager.ConnectionStrings[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MyDBConnection&amp;#34;&lt;/span&gt;].ConnectionString;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The ConfigurationManager class in included with in the System.Configuration namespace.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cs&#34; data-lang=&#34;cs&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; System.Configuration;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After the using statement included, compiler says that&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“The name ‘ConfigurationManager’ does not exist in the current context”.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To resolve this problem you need to add reference to “C:\Windows\Microsoft.NET\Framework&amp;lt;Version Folder&amp;gt;\System.configuration.dll” using following steps. (Eg: C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.Configuration.dll)
+Goto Project -&amp;gt; Add References…&lt;/p&gt;
+&lt;p&gt;Switch to “Assemblies” tab in ‘Add Reference’ window, and select System.Configuration and click OK to add the reference in your project. (You can search “System.Configuration” to locate the reference)&lt;/p&gt;
+&lt;p&gt;Now the connection string from the app.config file will be accessed using the above code.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

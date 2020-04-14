@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Wordpress | GK Views</title>
+    <link>/tags/wordpress/</link>
+      <atom:link href="/tags/wordpress/index.xml" rel="self" type="application/rss+xml" />
+    <description>Wordpress</description><language>en-us</language><copyright>© 2020 GK Views</copyright><lastBuildDate>Thu, 25 May 2017 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hub57c009c5aaffe3e86e976fb98747594_109132_512x512_fill_lanczos_center_2.png</url>
+      <title>Wordpress</title>
+      <link>/tags/wordpress/</link>
+    </image>
+    
+    <item>
+      <title>How to change username in WordPress</title>
+      <link>/post/how-to-change-username-in-wordpress/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      <guid>/post/how-to-change-username-in-wordpress/</guid>
+      <description>&lt;p&gt;There are three ways to change the username in WordPress.&lt;/p&gt;
+&lt;p&gt;First one is using Add New User in WordPress:-&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Login to your WordPress dashboard.&lt;/li&gt;
+&lt;li&gt;Click on Add New User in User section and provide user details. Make sure that the role should be Administrator then click on Add User.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;Add_New_User_Wordpress.png&#34; alt=&#34;Add_New_User_Wordpress&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Log out current user session and Login again using new user credential. Once you logged in successfully, Go to User section.&lt;/li&gt;
+&lt;li&gt;Select the admin user and then click the delete button.&lt;/li&gt;
+&lt;li&gt;It asks about existing posts. Select Attribute all posts and links to option and select your current username in the drop down and then click Confirm Delete.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now the admin user is deleted from your user section and the existing posts are changed to your current user detail.&lt;/p&gt;
+&lt;p&gt;The Second way is using phpMyAdmin:-&lt;/p&gt;
+&lt;p&gt;You need a credential for your database to do these steps.&lt;/p&gt;
+&lt;p&gt;Backup your database before doing the following steps for safety.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Login to phpMyAdmin to access your database.&lt;/li&gt;
+&lt;li&gt;Under the Structure section, you will find out WP_users table. (the prefix of the table WP_ may vary in your table structure, based on your table prefix configuration )&lt;/li&gt;
+&lt;li&gt;Click the Browse icon next to that table it will list out the records in the table(the users for your site). Here you can find the username.&lt;/li&gt;
+&lt;li&gt;Click on Edit icon (Like pencil icon) in the corresponding row.&lt;/li&gt;
+&lt;li&gt;Change the value of the user_login field to your new login username and click Go button to save the current changes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now you can log in using the new username which you updated in the user table&lt;/p&gt;
+&lt;p&gt;The third way is using the WordPress plugin:-&lt;/p&gt;
+&lt;p&gt;The following plugin will help you to change the user’s login username.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://wordpress.org/plugins/username-changer/&#34; target=&#34;_blank&#34; title=&#34;Username Changer Wordpress Plugin&#34; &gt;Username Changer&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://wordpress.org/plugins/user-id-changer/&#34; target=&#34;_blank&#34; title=&#34;User ID Changer Wordpress Plugin&#34; &gt;User ID Changer&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You need to follow the instructions within the plugin to change username.&lt;/p&gt;
+&lt;p&gt;You may use any one the way to change the default username. But my preference goes to the first way. Because it is secured one and it is provided by WordPress itself.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

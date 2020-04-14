@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>General | GK Views</title>
+    <link>/tags/general/</link>
+      <atom:link href="/tags/general/index.xml" rel="self" type="application/rss+xml" />
+    <description>General</description><language>en-us</language><copyright>© 2020 GK Views</copyright><lastBuildDate>Thu, 25 May 2017 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hub57c009c5aaffe3e86e976fb98747594_109132_512x512_fill_lanczos_center_2.png</url>
+      <title>General</title>
+      <link>/tags/general/</link>
+    </image>
+    
+    <item>
+      <title>Interesting Facts About Numbers</title>
+      <link>/post/interesting-facts-about-numbers/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      <guid>/post/interesting-facts-about-numbers/</guid>
+      <description>&lt;p&gt;The letters &lt;strong&gt;A, B, C and D&lt;/strong&gt; do not appear in the spelling of 1 to 99 (That is &lt;strong&gt;ONE, TWO, .. NINETY NINE&lt;/strong&gt;). The letter &lt;strong&gt;D&lt;/strong&gt; appears the first time in &lt;strong&gt;HUNDRED&lt;/strong&gt;. The letter &lt;strong&gt;A&lt;/strong&gt; appears the first time in &lt;strong&gt;THOUSAND&lt;/strong&gt;. The letter &lt;strong&gt;B&lt;/strong&gt; appears the first time in &lt;strong&gt;BILLION&lt;/strong&gt;. The letter &lt;strong&gt;C&lt;/strong&gt; appears the first time in &lt;strong&gt;CORER&lt;/strong&gt;. Very interesting isn’t it? Share here if you know any interesting facts about numbers.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Windowless ActiveX controls are not supported</title>
+      <link>/post/windowless-activex-controls-are-not-supported/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      <guid>/post/windowless-activex-controls-are-not-supported/</guid>
+      <description>&lt;p&gt;In windows 7 environment you may receive “Unable to get window handle, Windowless ActiveX controls are not supported..” exception, when you display a child form that contains ActiveX user controls. The user control may be a third party control. To avoid this exception you may disable DEP (Data Execution Prevention) for your ActiveX control.&lt;/p&gt;
+&lt;p&gt;DEP (Data Execution Prevention) is a security feature from windows 7 operating system to prevent damage your system from viruses and other security threats. If your user control access memory in an incorrect way, the DEP will close the program.&lt;/p&gt;
+&lt;p&gt;If you trust the user control which you integrated with the application, you may disable the DEP for that program in the following way.&lt;/p&gt;
+&lt;p&gt;Go to Control Panel -&amp;gt; System and Security -&amp;gt; System&lt;/p&gt;
+&lt;p&gt;You will get a list of options on the left side of the window.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;DEP_1.png&#34; alt=&#34;DEP 1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Click on the “Advanced system settings” link. You will get the System properties window.&lt;/p&gt;
+&lt;p&gt;In that System properties window, switch to an Advanced tab and click on the settings button under the Performance section, you will get Performance Options window.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;DEP_2.png&#34; alt=&#34;DEP 2&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Switch to Data Execution Prevention tab and select “Turn on DEP for all programs and services except those I select:” option.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;DEP_3.png&#34; alt=&#34;DEP 3&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now the “Add…” button is enabled, then you can add the specific program which you want to disable the DEP.&lt;/p&gt;
+&lt;p&gt;This changes will apply only after you restart the system.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;DEP_4.png&#34; alt=&#34;DEP 4&#34;&gt;&lt;/p&gt;
+&lt;p&gt;If you want to disable the DEP completely, using the command prompt you need to do the following steps.&lt;/p&gt;
+&lt;p&gt;Select Start Menu -&amp;gt; All Programs -&amp;gt; Accessories.&lt;/p&gt;
+&lt;p&gt;You will see the Command Prompt under Accessories. Right click on the Command Prompt and select “Run as administrator”.&lt;/p&gt;
+&lt;p&gt;Enter the following command and execute it to disable DEP completely.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34; data-lang=&#34;dos&#34;&gt;bcdedit.exe /set {current} nx AlwaysOff
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you want to enable DEP, you need to execute the following command.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34; data-lang=&#34;dos&#34;&gt;bcdedit.exe /set {current} nx AlwaysOn
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;These changes will be affected after you restart the computer.&lt;/p&gt;
+&lt;p&gt;By default, DEP is turned on in windows 7.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
